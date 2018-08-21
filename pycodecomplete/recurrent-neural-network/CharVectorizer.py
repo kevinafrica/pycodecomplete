@@ -3,6 +3,8 @@ import pandas as pd
 import string
 import io
 import os
+import unicodedata
+import sys
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class CharVectorizer(BaseEstimator, TransformerMixin):
@@ -78,28 +80,28 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
         return np.vstack(X_output), np.vstack(y_output)
 
     def documents_to_strings(self, raw_documents):
-
         if self.input == 'content':
             for text in [raw_documents]:
-                yield text
+                yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
         elif self.input == 'filepath':
             if os.path.isfile(raw_documents):
-                with io.open(raw_documents, encoding='utf-8') as f:
+                with io.open(raw_documents, encoding=self.encoding) as f:
                     contents = f.read()
                 for text in [contents]:
-                    yield text
+                    yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
             else:
                 raise ValueError("input is 'filepath' but raw_documents filepath is not a file")
         elif self.input == 'directorypath':
-            if 1 == 1:
+            if os.path.isdir(raw_documents):
                 for dirName, _, fileList in os.walk(raw_documents):
                     #print('Found directory: %s' % dirName)
                     for fname in fileList:
                         if fname.endswith(self.file_extension):
                             filepath = os.path.join(dirName, fname)
-                            #print(filepath)
+                            print(filepath)
                             with io.open(filepath, encoding=self.encoding) as f:
-                                yield f.read()
+                                text = f.read()
+                            yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
             else:
                 raise ValueError("input is 'directorypath' but raw_documents is not a directory")
         else:
