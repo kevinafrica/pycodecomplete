@@ -119,18 +119,18 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
         else:
             raise ValueError("input must be string {'filepath', 'directorypath', 'content'}")
 
-    def batch_generator(self, count=None, batch_size=512):
+    def __batch_generator(self, count=None, batch_size=512):
         '''Generate a batch of vectorized training data for each file'''
         while True:
 
             if count is None:
                 count = self.n_files
 
-            for _ in range(count):
+            for file_path in self.file_list:
 
                 sequences = []
                 next_chars = []
-                file_path = random.sample(self.file_list, 1)[0]
+                #file_path = random.sample(self.file_list, 1)[0]
                 
                 with io.open(file_path, encoding=self.encoding) as f:
                     text = f.read()
@@ -167,3 +167,54 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
                 if len(X) - ix < batch_size:
                     yield X[ix,:,:], y[ix,:]
                 '''
+
+    def batch_generator(self, batch_size=512):
+        for file_path in self.file_list:
+            sequences = []
+            next_chars = []
+            #file_path = random.sample(self.file_list, 1)[0]
+            
+            with io.open(file_path, encoding=self.encoding) as f:
+                text = f.read()
+
+            text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
+            text = self.n_pad(text, self.sequence_length)
+
+            print(text)
+
+            for i in range(0, len(text) - self.sequence_length, self.step_size):
+                sequences.append(text[i: i + self.sequence_length])
+                next_chars.append(text[i + self.sequence_length])
+            
+            #Create zeroed feature array shape number of sentences x max_length x 100
+            X = np.zeros((len(sequences), self.sequence_length, len(string.printable)), dtype=np.bool)
+            #Create zeroed target array shape number of sentences x 100
+            y = np.zeros((len(sequences), len(string.printable)), dtype=np.bool)
+            
+            #Encode character with a True in the corresponsing index
+            for i, sequence in enumerate(sequences):
+                for letter_ind, char in enumerate(sequence):
+                    X[i, letter_ind, self.char_indices[char]] = True
+                y[i, self.char_indices[next_chars[i]]] = True
+
+            for ix in range(0, len(X), batch_size):
+                #print(file_path, len(X), ix)
+                yield X[ix:ix+batch_size,:,:], y[ix:ix+batch_size,:]
+
+    def shuffle_files(self):
+        random.shuffle(self.file_list)
+
+    def pad_to_length(self, text, length, padding='\x0b'):
+        return padding * (length - len(text)) + text
+    
+    def n_pad(self, text, n, padding='\x0b'):
+        return padding * n + text
+
+    def decode_char(self, X):
+        return self.indices_char[X.nonzero()[0][0]]
+
+    def decode_seq(self, X):
+        out = ''
+        for v in X:
+            out += self.decode_char(v)
+        return out
