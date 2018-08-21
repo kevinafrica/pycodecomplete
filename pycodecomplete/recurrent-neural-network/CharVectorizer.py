@@ -83,18 +83,24 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
             for text in [raw_documents]:
                 yield text
         elif self.input == 'filepath':
-            with io.open(raw_documents, encoding='utf-8') as f:
-                contents = f.read()
-            for text in [contents]:
-                yield text
+            if os.path.isfile(raw_documents):
+                with io.open(raw_documents, encoding='utf-8') as f:
+                    contents = f.read()
+                for text in [contents]:
+                    yield text
+            else:
+                raise ValueError("input is 'filepath' but raw_documents filepath is not a file")
         elif self.input == 'directorypath':
-            for dirName, _, fileList in os.walk(raw_documents):
-                #print('Found directory: %s' % dirName)
-                for fname in fileList:
-                    if fname.endswith(self.file_extension):
-                        filepath = os.path.join(dirName, fname)
-                        #print(filepath)
-                        with io.open(filepath, encoding=self.encoding) as f:
-                            yield f.read()
+            if 1 == 1:
+                for dirName, _, fileList in os.walk(raw_documents):
+                    #print('Found directory: %s' % dirName)
+                    for fname in fileList:
+                        if fname.endswith(self.file_extension):
+                            filepath = os.path.join(dirName, fname)
+                            #print(filepath)
+                            with io.open(filepath, encoding=self.encoding) as f:
+                                yield f.read()
+            else:
+                raise ValueError("input is 'directorypath' but raw_documents is not a directory")
         else:
             raise ValueError("input must be string {'filepath', 'directorypath', 'content'}")
