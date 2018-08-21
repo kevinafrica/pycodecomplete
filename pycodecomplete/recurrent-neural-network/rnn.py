@@ -4,9 +4,13 @@ import os
 import string
 from keras.models import Sequential
 from keras.layers import LSTM, Dropout, Activation, Dense
+from process_text import CharVectorizer
+
 
 def batch_generator(directorypath):
-    if os.is
+    if os.path.isdir(directorypath):
+
+
 
 
 def build_model(sequence_length, vocabulary_size, n_layers=1,

@@ -180,8 +180,6 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
             text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
             text = self.n_pad(text, self.sequence_length)
 
-            print(text)
-
             for i in range(0, len(text) - self.sequence_length, self.step_size):
                 sequences.append(text[i: i + self.sequence_length])
                 next_chars.append(text[i + self.sequence_length])
