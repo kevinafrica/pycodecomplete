@@ -1,60 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
+  <title>Python Code Complete</title>
+  <meta name="description" content="Python Code Complete">
+  <meta name="kevin" content="Python Code Complete">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.atwho.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple.css') }}">
 
-  <title>DSI Text Classifier</title>
-  <meta name="description" content="DSI Text Classifier">
-  <meta name="kevin" content="Galvanize DSI">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}">  
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}">  
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.caret.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.atwho.js') }}"></script>
 
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='jquery.js') }}">  
-    </script>
-    
+  <script type="text/javascript">
 
-    <script type="text/javascript" 
-            src="{{ url_for('static', filename='app.js') }}">  
-    </script>
-    
-    <link rel="stylesheet" type="text/css" 
-          href="{{ url_for('static', filename='css/grayscale.css') }}">
-  
+    $("#inputor").atwho({
+      at: '@',
+      data:['Peter', 'Tom', 'Anne']
+    })
+
+  </script>
+
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
 
-    <h1>The DSI Text Classifier</h1>
+    <h1>Python Code Complete</h1>
 
-    <div class="row">
-        <p>This app will classify your text for you!</p>
-        <p><a href="/submit">Submit text data the old way...</a></p>
+
+    <div>
+      <textarea id="inputor" class="inputor">Enter code here :)</textarea>
     </div>
+    >
+
+
 
     <div class="row">
-      <div class="form-inline">
-
-        <div class="form-group">
-          <p class="form-control-static">Text:</p>
-        </div>
-        <div class="form-group">
-          <input class="form-control" id="txt"></input>
-        </div>
-
-
-        <div class="form-group">
-          <button type="button" id="predict" class="btn-primary">Predict!</button>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="row">
-        <!-- The span has an id so that later we can fill in the solution
+      <!-- The span has an id so that later we can fill in the solution
              using js. -->
-        <p> The subject of you text is: <span id="solution"></span> </p>
+      <p><span id="solution"></span> </p>
     </div>
 
-</div>
+  </div>
 </body>
+
 </html>

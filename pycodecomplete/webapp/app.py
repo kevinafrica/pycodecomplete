@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('template.html')
 
 @app.route('/submit')
 def submit():
@@ -22,15 +22,14 @@ def submit():
 @app.route('/submit-predict', methods=['POST'])
 def sub_pre_ajax():
     user_data = request.json
-
     text = str(user_data['text'])
 
-    with open('model.pkl', 'rb') as f:
-        model = pickle.load(f)
+    #with open('model.pkl', 'rb') as f:
+    #    model = pickle.load(f)
         
-    prediction = str(model.predict([text])[0])
+    #prediction = str(model.predict([text])[0])
 
-    return jsonify({'prediction': prediction})
+    return jsonify({'prediction': text})
 
 @app.route('/predict', methods=['POST'])
 def predict():
