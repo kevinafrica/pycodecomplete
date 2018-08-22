@@ -6,24 +6,21 @@
   <title>Python Code Complete</title>
   <meta name="description" content="Python Code Complete">
   <meta name="kevin" content="Python Code Complete">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.atwho.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple.css') }}">
 
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}">  
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}">  
   </script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}">  
   </script>
+
+  <!--
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.atwho.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simple.css') }}">
+
+  
+
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.caret.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.atwho.js') }}"></script>
-
-  <script type="text/javascript">
-
-    $("#inputor").atwho({
-      at: '@',
-      data:['Peter', 'Tom', 'Anne']
-    })
-
-  </script>
+  -->
 
 </head>
 
@@ -34,15 +31,13 @@
 
 
     <div>
-      <textarea id="inputor" class="inputor">Enter code here :)</textarea>
+      <textarea id="code-input" class="code-input">Enter code here :)</textarea>
     </div>
-    >
+    
 
 
 
     <div class="row">
-      <!-- The span has an id so that later we can fill in the solution
-             using js. -->
       <p><span id="solution"></span> </p>
     </div>
 

@@ -1,25 +1,37 @@
-let get_text_data = function() {
-    let text = $("input#txt").val()
-
-    return {'text': text} 
+let get_text_data = function () {
+    let text = $("textarea#code-input").val()
+    return { 'text': text }
 };
 
-let send_text_json = function(text) {
+let send_text_json = function (text) {
     $.ajax({
         url: '/submit-predict',
         contentType: "application/json; charset=utf-8",
         type: 'POST',
         success: function (data) {
-            display_solutions(data);
-            console.log("hi")
+            display_prediction(data);
+            console.log("predict")
         },
         data: JSON.stringify(text)
     });
 };
 
-let display_solutions = function(data) {
+let display_prediction = function (data) {
     $("span#solution").html(data['prediction'])
 };
+
+$(function ()
+{
+    $('textarea#code-input').keyup(function () {
+        let text = $("textarea#code-input").val()
+        console.log(text)
+
+        let text_json = get_text_data();
+        send_text_json(text_json);
+    });
+});
+
+
 
 
 $(document).ready(function() {
