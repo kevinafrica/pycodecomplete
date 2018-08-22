@@ -39,6 +39,16 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
     def sequences(self):
         return True
 
+    @property
+    def steps_per_epoch(self, n=10):
+        text_lengths = []
+        file_paths = random.sample(self.file_list, n)
+        for file_path in file_paths:
+            with io.open(file_path, encoding=self.encoding) as f:
+                text = f.read()
+            text_lengths.append(len(text))
+        return int(np.mean(text_lengths))
+            
     def fit(self, raw_documents, y=None):
         if self.input == 'directorypath':
             if not os.path.isdir(raw_documents):
