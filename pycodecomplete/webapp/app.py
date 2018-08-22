@@ -1,8 +1,14 @@
 from flask import Flask, request, render_template, jsonify
 from keras.models import load_model
 import pickle
+from static.ml.process_text import CharVectorizer
+from static.ml.code_generation import CodeGenerator
+cv = CharVectorizer(sequence_length=100)
 
 app = Flask(__name__)
+char_vec = CharVectorizer(sequence_length=100)
+model = load_model('static/ml/rnn')
+code_generator = CodeGenerator(model, char_vec)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -27,9 +33,9 @@ def sub_pre_ajax():
     #with open('model.pkl', 'rb') as f:
     #    model = pickle.load(f)
         
-    #prediction = str(model.predict([text])[0])
+    prediction = code_generator.predict_n_with_previous(text)
 
-    return jsonify({'prediction': text})
+    return jsonify({'prediction': prediction})
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -50,18 +56,5 @@ def predict():
             </body>
         </html>'''
         
-
-def welcome_page():
-    return '''
-        <!DOCTYPE html>
-        <html>
-            <head>
-            </head> 
-            <body>
-                <a href="/submit">Submit text data</a>
-                <a href="/submit-predict">Submit text data with Ajax!</a>
-            </body>
-        </html>'''
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
