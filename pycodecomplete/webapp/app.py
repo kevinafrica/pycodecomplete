@@ -33,7 +33,7 @@ def sub_pre_ajax():
     #with open('model.pkl', 'rb') as f:
     #    model = pickle.load(f)
         
-    prediction = code_generator.predict_n_with_previous(text)
+    prediction = code_generator.predict_n_with_previous(text, 10)
 
     return jsonify({'prediction': prediction})
 
