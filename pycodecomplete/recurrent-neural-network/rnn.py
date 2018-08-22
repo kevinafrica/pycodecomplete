@@ -15,7 +15,8 @@ from keras.utils.data_utils import get_file
 
 class pyCodeRNNBuilder():
 
-    def __init__(self, sequence_length, save_pickle_folder, vocabulary=string.printable,
+    def __init__(self, sequence_length, save_pickle_folder, pycode_directory, 
+                 vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
                  dropout=True, dropout_rate=.2):
         self.sequence_length = sequence_length
@@ -34,6 +35,7 @@ class pyCodeRNNBuilder():
         self.char_vectorizer = CharVectorizer(tokens=self.vocabulary,
                 sequence_length=self.sequence_length,
                 input='directorypath', encoding='utf-8')
+        self.char_vectorizer.fit(pycode_directory)
 
         self.checkpoint = ModelCheckpoint(
             self.save_pickle_path % (self.sequence_length, self.vocabulary_size,
@@ -94,11 +96,11 @@ class pyCodeRNNBuilder():
             for i in range(400):
                 x_pred = np.zeros((1, self.char_vectorizer.sequence_length, len(self.char_vectorizer.tokens)))
                 for t, char in enumerate(sentence):
-                    x_pred[0, t, char_indices[char]] = 1.
+                    x_pred[0, t, self.char_vectorizer.char_indices[char]] = 1.
 
-                preds = model.predict(x_pred, verbose=0)[0]
-                next_index = sample(preds, diversity)
-                next_char = indices_char[next_index]
+                preds = self.model.predict(x_pred, verbose=0)[0]
+                next_index = self.sample(preds, diversity)
+                next_char = self.char_vectorizer.indices_char[next_index]
 
                 generated += next_char
                 sentence = sentence[1:] + next_char
@@ -108,12 +110,8 @@ class pyCodeRNNBuilder():
             print()
 
 
-    def fit(self, pycode_directory, steps_per_epoch=None, max_queue_size=1,
+    def fit(self, steps_per_epoch=None, max_queue_size=1,
             epochs=5, initial_epoch=0, validation_steps=None):
-        if not os.path.isdir(pycode_directory):
-            raise ValueError('not a directory')
-
-        self.char_vectorizer.fit(pycode_directory)
 
         if steps_per_epoch is None:
             steps_per_epoch = self.char_vectorizer.steps_per_epoch
