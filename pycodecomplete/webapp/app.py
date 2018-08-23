@@ -1,14 +1,26 @@
+import sys
+import pdb
+
+#pdb.set_trace()
+sys.path.append('..')
+
 from flask import Flask, request, render_template, jsonify
 from keras.models import load_model
-import pickle
-from static.ml.process_text import CharVectorizer
-from static.ml.code_generation import CodeGenerator
-cv = CharVectorizer(sequence_length=100)
+from keras import Sequential
+
+from ml.code_generation import CodeGenerator
+from ml.process_text import CharVectorizer
+
+'''
+from .ml.code_generation import CodeGenerator
+from ...process_text import CharVectorizer
+'''
+char_vec = CharVectorizer(sequence_length=100)
+model = load_model('../trained-models/rnn')
+code_gen = CodeGenerator(model, char_vec)
+
 
 app = Flask(__name__)
-char_vec = CharVectorizer(sequence_length=100)
-model = load_model('static/ml/rnn')
-code_generator = CodeGenerator(model, char_vec)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -33,9 +45,9 @@ def sub_pre_ajax():
     #with open('model.pkl', 'rb') as f:
     #    model = pickle.load(f)
         
-    prediction = code_generator.predict_n_with_previous(text, 10)
-
-    return jsonify({'prediction': prediction})
+    prediction = code_gen.predict_n_with_previous(text, 10)
+    print(code_gen)
+    return jsonify({'prediction': text})
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -8,7 +8,6 @@ import time
 from keras.models import Sequential
 from keras.layers import LSTM, Dropout, Activation, Dense
 from process_text import CharVectorizer
-from process_text import CharVectorizer
 from keras.callbacks import LambdaCallback, ModelCheckpoint
 from keras.optimizers import RMSprop, Adam
 from keras.utils.data_utils import get_file
@@ -18,7 +17,7 @@ class pyCodeRNNBuilder():
     def __init__(self, sequence_length, save_pickle_folder, pycode_directory, 
                  vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
-                 dropout=True, dropout_rate=.2):
+                 dropout=True, dropout_rate=.2, model=None):
         self.sequence_length = sequence_length
         self.vocabulary = vocabulary
         self.vocabulary_size = len(vocabulary)
@@ -30,7 +29,7 @@ class pyCodeRNNBuilder():
         self.save_pickle_path = os.path.join(
             self.save_pickle_folder,
             ('%dx%d_%d-nlayers_%d-hiddenlayerdim_%f-dropout_epoch{epoch:03d}-loss{loss:.4f}-val-loss{val_loss:.4f}_weights'))
-        self.model = None
+        self.model = model
 
         self.char_vectorizer = CharVectorizer(tokens=self.vocabulary,
                 sequence_length=self.sequence_length,
