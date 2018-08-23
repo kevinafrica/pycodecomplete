@@ -3,17 +3,14 @@ import string
 import sys
 import numpy as np
 from keras.models import Sequential
-from keras.layers import LSTM, Dropout, Activation, Dense
 from process_text import CharVectorizer
-from keras.callbacks import LambdaCallback, ModelCheckpoint
-from keras.optimizers import RMSprop, Adam
-from keras.utils.data_utils import get_file
 
 class CodeGenerator():
 
     def __init__(self, model, char_vectorizer):
         self.model = model
         self.char_vectorizer = char_vectorizer
+        self.char_vectorizer.shuffle_files()
 
     def sample(self, preds, temperature=1.0):
         # helper function to sample an index from a probability array
