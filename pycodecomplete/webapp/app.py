@@ -6,7 +6,7 @@ from keras.models import load_model
 from keras import Sequential
 from ml.code_generation import CodeGenerator
 from ml.process_text import CharVectorizer
-app = Flask(__name__)
+app = Flask(__name__.split('.')[0])
 
 char_vec = None
 model = None
