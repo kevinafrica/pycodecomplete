@@ -28,7 +28,7 @@ class pyCodeRNNBuilder():
         self.save_pickle_folder = save_pickle_folder
         self.save_pickle_path = os.path.join(
             self.save_pickle_folder,
-            ('%dx%d_%d-nlayers_%d-hiddenlayerdim_%0.2f-dropout_epoch{epoch:03d}-loss{loss:.4f}-val-loss{val_loss:.4f}_weights'))
+            ('%dx%d_%d-nlayers_%d-hiddenlayerdim_%0.2f-dropout_epoch{epoch:03d}-loss{loss:.4f}-val-loss{val_loss:.4f}'))
         self.model = model
 
         self.char_vectorizer = CharVectorizer(tokens=self.vocabulary,
