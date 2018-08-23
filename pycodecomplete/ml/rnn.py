@@ -1,16 +1,24 @@
-import numpy as np
+'''RNN model building and training'''
+
+# Authors: Kevin Africa
+# License: MIT
+
 import os
 import random
 import sys
 import io
 import string
 import time
+
+import numpy as np
+
 from keras.models import Sequential
 from keras.layers import LSTM, Dropout, Activation, Dense
-from process_text import CharVectorizer
 from keras.callbacks import LambdaCallback, ModelCheckpoint
 from keras.optimizers import RMSprop, Adam
 from keras.utils.data_utils import get_file
+
+from .process_text import CharVectorizer
 
 class pyCodeRNNBuilder():
 

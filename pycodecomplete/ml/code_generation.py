@@ -1,9 +1,18 @@
+'''Predict code using a trained RNN model and a
+   fit character vectorizer'''
+
+# Author: Kevin Africa
+# License: MIT
+
 import random
 import string
 import sys
+
 import numpy as np
+
 from keras.models import Sequential
-from process_text import CharVectorizer
+
+from .process_text import CharVectorizer
 
 class CodeGenerator():
 

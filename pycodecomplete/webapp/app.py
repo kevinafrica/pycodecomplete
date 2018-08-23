@@ -1,6 +1,6 @@
 import sys
 import pdb
-sys.path.append('..')
+#sys.path.append('..')
 from flask import Flask, request, render_template, jsonify
 from keras.models import load_model
 from keras import Sequential

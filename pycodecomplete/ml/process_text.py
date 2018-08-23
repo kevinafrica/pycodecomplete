@@ -1,12 +1,17 @@
-import numpy as np
-import pandas as pd
-import dask.array as da
+'''Convert text into character vectors'''
+
+# Author: Kevin Africa
+
 import string
 import io
 import os
 import unicodedata
 import sys
 import random
+
+import numpy as np
+import pandas as pd
+
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class CharVectorizer(BaseEstimator, TransformerMixin):
