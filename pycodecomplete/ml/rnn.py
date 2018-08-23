@@ -7,7 +7,7 @@ import string
 import time
 from keras.models import Sequential
 from keras.layers import LSTM, Dropout, Activation, Dense
-from process_text import CharVectorizer
+from .process_text import CharVectorizer
 from keras.callbacks import LambdaCallback, ModelCheckpoint
 from keras.optimizers import RMSprop, Adam
 from keras.utils.data_utils import get_file
