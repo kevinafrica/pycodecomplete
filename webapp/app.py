@@ -1,11 +1,15 @@
 import sys
 import pdb
-#sys.path.append('..')
+sys.path.append('..')
+
 from flask import Flask, request, render_template, jsonify
+
 from keras.models import load_model
 from keras import Sequential
-from ml.code_generation import CodeGenerator
-from ml.process_text import CharVectorizer
+
+from pycodecomplete.ml import CharVectorizer
+from pycodecomplete.ml import CodeGenerator
+
 app = Flask(__name__.split('.')[0])
 
 char_vec = None
@@ -20,7 +24,7 @@ def load_objects():
     global model
 
     char_vec = CharVectorizer(sequence_length=100)
-    model = load_model('../trained-models/rnn')
+    model = load_model('../pycodecomplete/trained-models/rnn')
     code_gen = CodeGenerator(model, char_vec)
 
 
@@ -41,7 +45,7 @@ def submit():
         '''
 
 
-@app.route('/submit-predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def sub_pre_ajax():
     user_data = request.json
     text = str(user_data['text'])
@@ -49,30 +53,9 @@ def sub_pre_ajax():
     # with open('model.pkl', 'rb') as f:
     #    model = pickle.load(f)
 
-    prediction = code_gen.predict_n_with_previous(text, 10)
-    print(code_gen)
+    #prediction = code_gen.predict_n_with_previous(text, 10)
+    print('predict')
     return jsonify({'prediction': text})
-
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    text = str(request.form['user_input'])
-
-    with open('model.pkl', 'rb') as f:
-        model = pickle.load(f)
-
-    prediction = model.predict([text])[0]
-
-    return f'''
-        <!DOCTYPE html>
-        <html>
-            <head>
-            </head>
-            <body>
-                {prediction}
-            </body>
-        </html>'''
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

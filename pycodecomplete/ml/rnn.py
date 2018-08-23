@@ -18,7 +18,7 @@ from keras.callbacks import LambdaCallback, ModelCheckpoint
 from keras.optimizers import RMSprop, Adam
 from keras.utils.data_utils import get_file
 
-from .process_text import CharVectorizer
+from process_text import CharVectorizer
 
 class pyCodeRNNBuilder():
 

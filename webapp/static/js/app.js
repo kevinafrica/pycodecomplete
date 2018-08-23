@@ -5,7 +5,7 @@ let get_text_data = function () {
 
 let send_text_json = function (text) {
     $.ajax({
-        url: '/submit-predict',
+        url: '/predict',
         contentType: "application/json; charset=utf-8",
         type: 'POST',
         success: function (data) {
