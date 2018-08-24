@@ -40,14 +40,18 @@ def main():
 
     print(r.text)
 
+
 def json_query():
-    return { 'query' : '{ viewer { repositories(first: 30) { totalCount pageInfo { hasNextPage endCursor } edges { node { name } } } } }' }
+    return {'query': '{ viewer { repositories(first: 30) { totalCount pageInfo { hasNextPage endCursor } edges { node { name } } } } }'}
+
 
 def header(api_token):
     return {'Authorization': 'token %s' % api_token}
 
+
 def apiurl():
     return 'https://api.github.com/graphql'
+
 
 if __name__ == '__main__':
     main()

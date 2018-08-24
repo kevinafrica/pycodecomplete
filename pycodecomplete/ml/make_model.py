@@ -16,6 +16,8 @@ def main():
                         help='Source folder of .py files that will be used to train the model')
     parser.add_argument('sequence_length', type=int, action='store',
                         help='')
+    parser.add_argument('batch_size', type=int, action='store',
+                        help='Set batch size')                   
     parser.add_argument('step_size', type=int, action='store',
                         help='')
     parser.add_argument('layers', type=int, action='store',
@@ -62,6 +64,7 @@ def main():
     
     print('Starting Training...')
     model_builder.fit(steps_per_epoch=settings.steps_per_epoch,
+                      batch_size=settings.batch_size,
                       epochs=settings.epochs,
                       shuffle_source_files=True)
 

@@ -121,7 +121,7 @@ class pyCodeRNNBuilder():
                 sys.stdout.flush()
             print()
 
-    def fit(self, steps_per_epoch=None, max_queue_size=1,
+    def fit(self, steps_per_epoch=None, max_queue_size=1, batch_size=512,
             epochs=5, initial_epoch=0, validation_steps=None,
             shuffle_source_files=True):
 
@@ -135,7 +135,7 @@ class pyCodeRNNBuilder():
             self.char_vectorizer.shuffle_files()
 
         self.model.fit_generator(
-            generator=self.char_vectorizer.batch_generator(),
+            generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
             steps_per_epoch=steps_per_epoch,
             max_queue_size=max_queue_size,
             epochs=epochs,
