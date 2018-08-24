@@ -7,8 +7,8 @@ from flask import Flask, request, render_template, jsonify
 from keras.models import load_model
 from keras import Sequential
 
-from pycodecomplete.ml import CharVectorizer
-from pycodecomplete.ml import CodeGenerator
+from pycodecomplete.ml.process_text import CharVectorizer
+from pycodecomplete.ml.code_generation import CodeGenerator
 
 app = Flask(__name__.split('.')[0])
 
