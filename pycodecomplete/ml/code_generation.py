@@ -12,7 +12,10 @@ import numpy as np
 
 from keras.models import Sequential
 
-from process_text import CharVectorizer
+from .process_text import CharVectorizer
+
+import tensorflow
+import keras
 
 class CodeGenerator():
 

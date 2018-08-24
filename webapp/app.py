@@ -53,9 +53,13 @@ def sub_pre_ajax():
     # with open('model.pkl', 'rb') as f:
     #    model = pickle.load(f)
 
-    #prediction = code_gen.predict_n_with_previous(text, 10)
+    #char_vec = CharVectorizer(sequence_length=100)
+    #model = load_model('../pycodecomplete/trained-models/rnn')
+    #code_gen = CodeGenerator(model, char_vec)
+
+    prediction = code_gen.predict_n_with_previous(text, 10)
     print('predict')
-    return jsonify({'prediction': text})
+    return jsonify({'prediction': prediction})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True, threaded=False)
