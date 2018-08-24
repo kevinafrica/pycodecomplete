@@ -40,34 +40,32 @@ def main():
     if not os.path.isdir(settings.source):
         arg_error(parser, 'error: Invalid source folder')
 
-    if settings.initial_model and not os.path.isfile(settings.initial_model):
-        arg_error(parser, 'error: Initial model file not found')
-
-    print('Creating Vectorizer...')
-    ch_vec = CharVectorizer(sequence_length=settings.sequence_length,
-                            step_size=settings.step_size)
-
     if settings.initial_model:
-        print('Loading Model...')
-        pretrained_model = load_model(settings.initial_model)
+        if os.path.isfile(settings.initial_model):
+            print('Loading Model...')
+            pretrained_model = load_model(settings.initial_model)
+        else:
+            arg_error(parser, 'error: Initial model file not found')
     else:
         pretrained_model = None
+
+    print(str(settings)[10:-1])
 
     print('Creating Model Trainer...')
     model_builder = pyCodeRNNBuilder(settings.sequence_length,
                                      settings.destination,
                                      settings.source,
                                      n_layers=settings.layers,
-                                     hidden_layer_dim=nodes_per_layer,
+                                     hidden_layer_dim=settings.nodes_per_layer,
                                      model=pretrained_model)
 
     
-
+    print('Starting Training...')
+    model_builder.fit(steps_per_epoch=settings.steps_per_epoch,
+                      epochs=settings.epochs,
+                      shuffle_source_files=True)
 
     
-
-    print(settings.destination)
-
 def arg_error(parser, message):
     parser.print_usage()
     print(f'{os.path.basename(__file__)}: {message}')
