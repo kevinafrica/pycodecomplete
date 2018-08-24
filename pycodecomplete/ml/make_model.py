@@ -4,9 +4,8 @@ from argparse import ArgumentParser
 
 from keras.models import load_model
 
-from . import rnn.CharVectorizer
+from rnn import pyCodeRNNBuilder
 from process_text import CharVectorizer
-from code_generation import CodeGenerator
 
 
 def main():
@@ -43,11 +42,24 @@ def main():
 
     if settings.initial_model and not os.path.isfile(settings.initial_model):
         arg_error(parser, 'error: Initial model file not found')
-    else:
-        pretrained_model = load_model(settings.initial_model)
 
+    print('Creating Vectorizer...')
     ch_vec = CharVectorizer(sequence_length=settings.sequence_length,
                             step_size=settings.step_size)
+
+    if settings.initial_model:
+        print('Loading Model...')
+        pretrained_model = load_model(settings.initial_model)
+    else:
+        pretrained_model = None
+
+    print('Creating Model Trainer...')
+    model_builder = pyCodeRNNBuilder(settings.sequence_length,
+                                     settings.destination,
+                                     settings.source,
+                                     n_layers=settings.layers,
+                                     hidden_layer_dim=nodes_per_layer,
+                                     model=pretrained_model)
 
     
 
