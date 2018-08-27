@@ -72,7 +72,7 @@ def main():
     
 def arg_error(parser, message):
     parser.print_usage()
-    print(f'{os.path.basename(__file__)}: {message}')
+    print('%s: %s' % (os.path.basename(__file__), message))
     sys.exit()
 
 
