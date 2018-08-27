@@ -52,9 +52,9 @@ class pyCodeRNNBuilder():
             self.save_pickle_path % (self.sequence_length, self.vocabulary_size,
                                      self.n_layers, self.hidden_layer_dim,
                                      self.dropout_rate),
-            save_weights_only=False
+            save_weights_only=False)
 
-        if not self.model:
+        if self.model is None:
             self.build_model()
         
 
