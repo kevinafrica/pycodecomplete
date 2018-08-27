@@ -56,7 +56,7 @@ class pyCodeRNNBuilder():
 
         if not self.model:
             self.build_model()
-        )
+        
 
     def build_model(self):
         """Build a Keras sequential model for training the char-rnn"""
