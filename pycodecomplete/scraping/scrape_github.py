@@ -3,7 +3,7 @@ import sys
 from argparse import ArgumentParser
 import json
 import requests
-import graphene
+import math
 import pandas as pd
 
 from git import Repo
@@ -34,7 +34,7 @@ def main():
                 token = f.readline().strip()
         except IsADirectoryError:
             print('error:', settings.token_file,
-                'is not a valid GitHub token file')
+                  'is not a valid GitHub token file')
             sys.exit()
         except FileNotFoundError:
             print('error:', settings.token_file, 'not found')
@@ -42,22 +42,21 @@ def main():
     elif settings.token_string:
         token = settings.token_string
 
-    r = requests.post(apiurl(),
-                      json=json_query(settings.count),
-                      headers=header(token))
 
-    data_dict = json.loads(r.text)
-
-    repos_df = parse_results(data_dict['data']['search']['edges'])
-
+    repos_df = df_from_query(token, settings.count, batch_size=100)
     repos_df.to_csv('repo_list.csv')
 
     clone_repos(settings.destination, repos_df)
 
 
-def json_query(count):
+def json_query(batch_size, after_cursor=''):
     return {'query': '''{
-  search(query: "stars:>1000 language:Python", type: REPOSITORY, first: %d) {
+  search(query: "stars:>1000 language:Python", type: REPOSITORY, first: %d, %s) {
+      pageInfo {
+      hasNextPage
+      endCursor
+      startCursor
+    }
     repositoryCount
     edges {
       node {
@@ -85,41 +84,76 @@ def json_query(count):
       }
     }
   }
-}''' % (count)}
+}''' % (batch_size, after_cursor)}
 
 
 def header(api_token):
     return {'Authorization': 'token %s' % api_token}
 
-
 def apiurl():
     return 'https://api.github.com/graphql'
 
 
-def parse_results(edge_list):
-    data_list = [pd.DataFrame.from_dict(
-        e['node'], orient='index').T for e in edge_list]
+def df_from_query(token, n, batch_size=10):
+
+    i = 0
+    n_batches = math.ceil(n / batch_size)
+    hasNextPage = True
+    end_Cursor = ''
+    data_list = []
+
+    while hasNextPage and i < n_batches:
+
+        if batch_size > n:
+            batch_size = n
+            
+        json_result = requests.post(apiurl(),
+                                         json=json_query(batch_size, end_Cursor),
+                                         headers=header(token))
+
+        data_dict = json.loads(json_result.text)
+        edge_list = data_dict['data']['search']['edges']
+        hasNextPage = data_dict['data']['search']['pageInfo']['hasNextPage']
+        end_Cursor = 'after: "%s"' % (data_dict['data']['search']['pageInfo']['endCursor'])
+
+        data_list.extend([pd.DataFrame.from_dict(
+            e['node'], orient='index').T for e in edge_list])
+
+        i += 1
+        n -= batch_size
+
     result = pd.concat(data_list, axis=0)
     result.index = range(result.shape[0])
     result['owner'] = result['owner'].apply(lambda x: x['login'])
     result['stargazers'] = result['stargazers'].apply(
         lambda x: x['totalCount'])
-    result['watchers'] = result['watchers'].apply(lambda x: x['totalCount'])
-    return(result)
+    result['watchers'] = result['watchers'].apply(
+        lambda x: x['totalCount'])
+
+    return result
 
 
-def clone_repos(to_path, repos_df):
+def clone_repos_from_df(to_path, repos_df):
     n = repos_df.shape[0]
     for i, row in repos_df.iterrows():
         path = os.path.join(to_path, row['name'])
         print('Cloning repo %d/%d to %s' % (i+1, n, path))
         Repo.clone_from(row['url'], path)
 
-        #Delete non-.py files
+        # Delete non-.py files
         for root, dirs, files in os.walk(path):
             for name in files:
                 if not name.endswith(('.py')):
                     os.remove(os.path.join(root, name))
+
+
+def clone_repos(n, batch_size=100):
+
+    n_batches = math.ceil(n / batch_size)
+
+    for i in range(n_batches):
+        pass
+
 
 if __name__ == '__main__':
     main()
