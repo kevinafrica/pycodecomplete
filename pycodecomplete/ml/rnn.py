@@ -26,7 +26,7 @@ class pyCodeRNNBuilder():
     def __init__(self, sequence_length, save_pickle_folder, pycode_directory,
                  vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
-                 dropout=True, dropout_rate=.2, model=None):
+                 dropout=True, dropout_rate=.2, step_size=1, model=None):
         self.sequence_length = sequence_length
         self.vocabulary = vocabulary
         self.vocabulary_size = len(vocabulary)
@@ -34,6 +34,7 @@ class pyCodeRNNBuilder():
         self.hidden_layer_dim = hidden_layer_dim
         self.dropout = dropout
         self.dropout_rate = dropout_rate
+        self.step_size = step_size
         self.save_pickle_folder = save_pickle_folder
         self.save_pickle_path = os.path.join(
             self.save_pickle_folder,
@@ -42,7 +43,9 @@ class pyCodeRNNBuilder():
 
         self.char_vectorizer = CharVectorizer(tokens=self.vocabulary,
                                               sequence_length=self.sequence_length,
-                                              input='directorypath', encoding='utf-8')
+                                              input='directorypath', encoding='utf-8',
+                                              step_size=self.step_size)
+
         self.char_vectorizer.fit(pycode_directory)
 
         self.checkpoint = ModelCheckpoint(

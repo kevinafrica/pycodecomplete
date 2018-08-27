@@ -59,6 +59,7 @@ def main():
                                      settings.source,
                                      n_layers=settings.layers,
                                      hidden_layer_dim=settings.nodes_per_layer,
+                                     step_size=settings.step_size,
                                      model=pretrained_model)
 
     
