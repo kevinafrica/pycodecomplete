@@ -40,7 +40,7 @@ def main():
             print('error:', settings.token_file, 'not found')
             sys.exit()
     elif settings.token_string:
-        token = token_string
+        token = settings.token_string
 
     r = requests.post(apiurl(),
                       json=json_query(settings.count),
@@ -114,6 +114,12 @@ def clone_repos(to_path, repos_df):
         path = os.path.join(to_path, row['name'])
         print('Cloning repo %d/%d to %s' % (i+1, n, path))
         Repo.clone_from(row['url'], path)
+
+        #Delete non-.py files
+        for root, dirs, files in os.walk(path):
+            for name in files:
+                if not name.endswith(('.py')):
+                    os.remove(os.path.join(root, name))
 
 if __name__ == '__main__':
     main()
