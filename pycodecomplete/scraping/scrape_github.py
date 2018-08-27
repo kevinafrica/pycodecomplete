@@ -46,7 +46,7 @@ def main():
     repos_df = df_from_query(token, settings.count, batch_size=100)
     repos_df.to_csv('repo_list.csv')
 
-    clone_repos(settings.destination, repos_df)
+    clone_repos_from_df(settings.destination, repos_df)
 
 
 def json_query(batch_size, after_cursor=''):
@@ -97,7 +97,7 @@ def apiurl():
 def df_from_query(token, n, batch_size=10):
 
     i = 0
-    n_batches = math.ceil(n / batch_size)
+    n_batches = math.ceil(n / float(batch_size))
     hasNextPage = True
     end_Cursor = ''
     data_list = []
