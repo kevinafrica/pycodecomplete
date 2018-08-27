@@ -136,7 +136,7 @@ def df_from_query(token, n, batch_size=10):
 def clone_repos_from_df(to_path, repos_df):
     n = repos_df.shape[0]
     for i, row in repos_df.iterrows():
-        path = os.path.join(to_path, row['name'])
+        path = os.path.join(to_path, row['nameWithOwner'])
         print('Cloning repo %d/%d to %s' % (i+1, n, path))
         Repo.clone_from(row['url'], path)
 
