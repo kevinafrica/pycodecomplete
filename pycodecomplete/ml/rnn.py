@@ -53,6 +53,9 @@ class pyCodeRNNBuilder():
                                      self.n_layers, self.hidden_layer_dim,
                                      self.dropout_rate),
             save_weights_only=False
+
+        if not self.model:
+            self.build_model()
         )
 
     def build_model(self):
