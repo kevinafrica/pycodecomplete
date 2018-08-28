@@ -17,6 +17,7 @@ from keras.layers import LSTM, Dropout, Activation, Dense
 from keras.callbacks import LambdaCallback, ModelCheckpoint
 from keras.optimizers import RMSprop, Adam
 from keras.utils.data_utils import get_file
+from keras.utils import multi_gpu_model
 
 from process_text import CharVectorizer
 
@@ -26,7 +27,7 @@ class pyCodeRNNBuilder():
     def __init__(self, sequence_length, save_pickle_folder, pycode_directory,
                  vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
-                 dropout=True, dropout_rate=.2, step_size=1, model=None):
+                 dropout=True, dropout_rate=.2, step_size=1, n_gpu=None, model=None):
         self.sequence_length = sequence_length
         self.vocabulary = vocabulary
         self.vocabulary_size = len(vocabulary)
@@ -40,6 +41,7 @@ class pyCodeRNNBuilder():
             self.save_pickle_folder,
             ('%dx%d_%d-nlayers_%d-hiddenlayerdim_%0.2f-dropout_epoch{epoch:03d}-loss{loss:.4f}-val-loss{val_loss:.4f}'))
         self.model = model
+        self.n_gpu = n_gpu
 
         self.char_vectorizer = CharVectorizer(tokens=self.vocabulary,
                                               sequence_length=self.sequence_length,
@@ -76,9 +78,16 @@ class pyCodeRNNBuilder():
         model.add(Dense(self.vocabulary_size))
         model.add(Activation('softmax'))
 
-        model.compile(loss='categorical_crossentropy', optimizer="adam")
-
-        self.model = model
+        if self.n_gpu is None:
+            model.compile(loss='categorical_crossentropy', optimizer="adam")
+            self.model = model
+            return model
+        else:
+            print('Using ', self.n_gpu, ' GPUs')
+            parallel_model = multi_gpu_model(model, gpus=self.n_gpu)
+            parallel_model.compile(loss='categorical_crossentropy', optimizer="adam")
+            self.model = parallel_model
+            return parallel_model
 
         return model
 
