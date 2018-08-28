@@ -30,6 +30,8 @@ def main():
                         help='Steps per Epochs')
     parser.add_argument('-i', type=int, action='store', dest='initial_epoch',
                         help='Set initial epoch < epochs')
+    parser.add_argument('-g', type=int, action='store', dest='n_gpu',
+                        help='Number of GPUs')                    
     parser.add_argument('-m', action='store', dest='initial_model',
                         help='Continue training an existing model')                       
     parser.add_argument('--version', action='version', version='%(prog)s 0.1')
@@ -60,6 +62,7 @@ def main():
                                      n_layers=settings.layers,
                                      hidden_layer_dim=settings.nodes_per_layer,
                                      step_size=settings.step_size,
+                                     n_gpu=settings.n_gpu
                                      model=pretrained_model)
 
     
