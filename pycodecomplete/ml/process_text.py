@@ -50,7 +50,7 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
         text_lengths = []
         file_paths = random.sample(self.file_list, n)
         for file_path in file_paths:
-            with io.open(file_path, encoding=self.encoding) as f:
+            with io.open(file_path, encoding=self.encoding, errors='ignore') as f:
                 text = f.read()
             text_lengths.append(len(text))
         return int(np.mean(text_lengths))
@@ -113,7 +113,7 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
                 yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
         elif self.input == 'filepath':
             if os.path.isfile(raw_documents):
-                with io.open(raw_documents, encoding=self.encoding) as f:
+                with io.open(raw_documents, encoding=self.encoding, errors='ignore') as f:
                     contents = f.read()
                 for text in [contents]:
                     yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
@@ -127,7 +127,7 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
                         if fname.endswith(self.file_extension):
                             filepath = os.path.join(dirName, fname)
                             #print(filepath)
-                            with io.open(filepath, encoding=self.encoding) as f:
+                            with io.open(filepath, encoding=self.encoding,  errors='ignore') as f:
                                 text = f.read()
                             yield unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
             else:
@@ -148,7 +148,7 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
                 next_chars = []
                 #file_path = random.sample(self.file_list, 1)[0]
                 
-                with io.open(file_path, encoding=self.encoding) as f:
+                with io.open(file_path, encoding=self.encoding, errors='ignore') as f:
                     text = f.read()
 
                 text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
@@ -190,7 +190,7 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
             next_chars = []
             #file_path = random.sample(self.file_list, 1)[0]
             
-            with io.open(file_path, encoding=self.encoding) as f:
+            with io.open(file_path, encoding=self.encoding, errors='ignore') as f:
                 text = f.read()
 
             text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii', 'replace')
