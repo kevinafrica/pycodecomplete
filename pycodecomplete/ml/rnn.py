@@ -27,14 +27,15 @@ class pyCodeRNNBuilder():
     def __init__(self, sequence_length, save_pickle_folder, pycode_directory,
                  vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
-                 dropout=True, dropout_rate=.2, step_size=None, n_gpu=None, model=None):
+                 dropout=True, dropout_rate=.2, step_size=1, n_gpu=None, model=None):
         self.sequence_length = sequence_length
         self.vocabulary = vocabulary
         self.vocabulary_size = len(vocabulary)
         self.n_layers = n_layers
         self.hidden_layer_dim = hidden_layer_dim
         self.dropout = dropout
-        self.dropout_rate = dropout_rate  
+        self.dropout_rate = dropout_rate
+        self.step_size = step_size
         self.save_pickle_folder = save_pickle_folder
         self.save_pickle_path = os.path.join(
             self.save_pickle_folder,
@@ -49,24 +50,15 @@ class pyCodeRNNBuilder():
 
         self.char_vectorizer.fit(pycode_directory)
 
-        if step_size is not None:
-            self.step_size = step_size
-        else:
-            self.step_size = self.char_vectorizer.steps_per_epoch(n=1000)
-
         self.checkpoint = ModelCheckpoint(
             self.save_pickle_path % (self.sequence_length, self.vocabulary_size,
                                      self.n_layers, self.hidden_layer_dim,
                                      self.dropout_rate),
             save_weights_only=False)
 
-
-
         if self.model is None:
             self.build_model()
         
-
-
 
     def build_model(self):
         """Build a Keras sequential model for training the char-rnn"""
