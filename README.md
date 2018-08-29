@@ -70,7 +70,8 @@ GitHub scr
 ![Numpy](https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Logo_of_NumPy.svg/1200px-Logo_of_NumPy.svg.png "Numpy")<!-- .element height="50%" width="50%" -->
 ![Pandas](https://pandas.pydata.org/_static/pandas_logo.png "Pandas")<!-- .element height="50%" width="50%" -->
 ![AWS](https://cdn-images-1.medium.com/max/1600/1*AD9ZSLXKAhZ-_WomszsmPg.png "AWS")<!-- .element height="50%" width="50%" -->
-![GitHub]<!-- .element height="50%" width="50%" -->(https://camo.githubusercontent.com/630f51296667710aa4dd5959ec5cbc9c03bd48ac/687474703a2f2f7777772e6168612e696f2f6173736574732f6769746875622e37343333363932636162626661313332663334616462303334653739303966612e706e67 "GitHub")<!-- .element height="50%" width="50%" -->
+
+<img src="https://camo.githubusercontent.com/630f51296667710aa4dd5959ec5cbc9c03bd48ac/687474703a2f2f7777772e6168612e696f2f6173736574732f6769746875622e37343333363932636162626661313332663334616462303334653739303966612e706e67" width="100">
 
 
 ## Future Work
