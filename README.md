@@ -64,13 +64,12 @@ GitHub scr
 
 ## Tech Stack
 
-![Python](https://www.python.org/static/community_logos/python-logo-master-v3-TM.png "Python")<!-- .element height="50%" width="50%" -->
-![Keras](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png "Keras")<!-- .element height="50%" width="50%" -->
-![Scikit-learn](https://kaggle2.blob.core.windows.net/competitions/kaggle/3428/media/scikit-learn-logo.png "Scikit-learn")<!-- .element height="50%" width="50%" -->
-![Numpy](https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Logo_of_NumPy.svg/1200px-Logo_of_NumPy.svg.png "Numpy")<!-- .element height="50%" width="50%" -->
-![Pandas](https://pandas.pydata.org/_static/pandas_logo.png "Pandas")<!-- .element height="50%" width="50%" -->
-![AWS](https://cdn-images-1.medium.com/max/1600/1*AD9ZSLXKAhZ-_WomszsmPg.png "AWS")<!-- .element height="50%" width="50%" -->
-
+<img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" width="250">
+<img src="https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png" width="250">
+<img src="https://kaggle2.blob.core.windows.net/competitions/kaggle/3428/media/scikit-learn-logo.png" width="250">
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Logo_of_NumPy.svg/1200px-Logo_of_NumPy.svg.png" width="250">
+<img src="https://pandas.pydata.org/_static/pandas_logo.png" width="250">
+<img src="https://cdn-images-1.medium.com/max/1600/1*AD9ZSLXKAhZ-_WomszsmPg.png" width="250">
 <img src="https://camo.githubusercontent.com/630f51296667710aa4dd5959ec5cbc9c03bd48ac/687474703a2f2f7777772e6168612e696f2f6173736574732f6769746875622e37343333363932636162626661313332663334616462303334653739303966612e706e67" width="250">
 
 
