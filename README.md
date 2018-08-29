@@ -68,50 +68,29 @@ GitHub scr
 
 ## References
 
-<html><body>
-<div class="csl-bib-body" style="line-height: 1.35; ">
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[1]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“The Unreasonable Effectiveness of Recurrent Neural Networks.” [Online]. Available: <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>. [Accessed: 06-Aug-2018].</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=The%20Unreasonable%20Effectiveness%20of%20Recurrent%20Neural%20Networks&amp;rft.identifier=http%3A%2F%2Fkarpathy.github.io%2F2015%2F05%2F21%2Frnn-effectiveness%2F"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[2]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">Andrej, <i>char-rnn: Multi-layer Recurrent Neural Networks (LSTM, GRU, RNN) for character-level language models in Torch</i>. 2018.</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=char-rnn%3A%20Multi-layer%20Recurrent%20Neural%20Networks%20(LSTM%2C%20GRU%2C%20RNN)%20for%20character-level%20language%20models%20in%20Torch&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fkarpathy%2Fchar-rnn&amp;rft.aulast=Andrej&amp;rft.au=Andrej&amp;rft.date=2018-08-13"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[3]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“A ten-minute introduction to sequence-to-sequence learning in Keras.” [Online]. Available: <a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html</a>. [Accessed: 14-Aug-2018].</div>
-  </div>
+<body>
+<div class="csl-bib-body" style="line-height: 1.35; margin-left: 2em; text-indent:-2em;">
+  <div class="csl-entry">“A Ten-Minute Introduction to Sequence-to-Sequence Learning in Keras.” Accessed August 14, 2018. <a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html">https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html</a>.</div>
   <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=A%20ten-minute%20introduction%20to%20sequence-to-sequence%20learning%20in%20Keras&amp;rft.identifier=https%3A%2F%2Fblog.keras.io%2Fa-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[4]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“Sequence-to-Sequence Models,” <i>TensorFlow</i>. [Online]. Available: <a href="https://www.tensorflow.org/versions/r1.2/tutorials/seq2seq">https://www.tensorflow.org/versions/r1.2/tutorials/seq2seq</a>. [Accessed: 14-Aug-2018].</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=Sequence-to-Sequence%20Models&amp;rft.identifier=https%3A%2F%2Fwww.tensorflow.org%2Fversions%2Fr1.2%2Ftutorials%2Fseq2seq&amp;rft.language=en"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[5]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">C. Moses, <i>keras-char-rnn: A Keras implementation of Andrej Karpathy’s char-rnn model in Python. Based on Keras with the TensorFlow backend</i>. 2018.</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=keras-char-rnn%3A%20A%20Keras%20implementation%20of%20Andrej%20Karpathy's%20char-rnn%20model%20in%20Python.%20Based%20on%20Keras%20with%20the%20TensorFlow%20backend&amp;rft.rights=GPL-3.0&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fmathematiguy%2Fkeras-char-rnn&amp;rft.aufirst=Caleb&amp;rft.aulast=Moses&amp;rft.au=Caleb%20Moses&amp;rft.date=2018-08-10"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[6]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;"><i>keras: Deep Learning for humans</i>. Keras, 2018.</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=keras%3A%20Deep%20Learning%20for%20humans&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fkeras-team%2Fkeras&amp;rft.date=2018-08-21"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[7]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">S. Ozair, <i>char-rnn-tensorflow:&nbsp; Multi-layer Recurrent Neural Networks (LSTM, RNN) for character-level language models in Python using Tensorflow</i>. 2018.</div>
-  </div>
-  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=char-rnn-tensorflow%3A%20%20Multi-layer%20Recurrent%20Neural%20Networks%20(LSTM%2C%20RNN)%20for%20character-level%20language%20models%20in%20Python%20using%20Tensorflow&amp;rft.rights=MIT&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fsherjilozair%2Fchar-rnn-tensorflow&amp;rft.aufirst=Sherjil&amp;rft.aulast=Ozair&amp;rft.au=Sherjil%20Ozair&amp;rft.date=2018-08-21"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[8]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“GitHub GraphQL API v4,” <i>GitHub Developer</i>. [Online]. Available: <a href="https://developer.github.com/v4/">https://developer.github.com/v4/</a>. [Accessed: 29-Aug-2018].</div>
-  </div>
+  <div class="csl-entry">Andrej. <i>Char-Rnn: Multi-Layer Recurrent Neural Networks (LSTM, GRU, RNN) for Character-Level Language Models in Torch</i>. Lua, 2018. <a href="https://github.com/karpathy/char-rnn">https://github.com/karpathy/char-rnn</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=char-rnn%3A%20Multi-layer%20Recurrent%20Neural%20Networks%20(LSTM%2C%20GRU%2C%20RNN)%20for%20character-level%20language%20models%20in%20Torch&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fkarpathy%2Fchar-rnn&amp;rft.aulast=Andrej&amp;rft.au=Andrej&amp;rft.date=2018-08-13"></span>
+  <div class="csl-entry">“GitHub GraphQL API V4.” GitHub Developer. Accessed August 29, 2018. <a href="https://developer.github.com/v4/">https://developer.github.com/v4/</a>.</div>
   <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=GitHub%20GraphQL%20API%20v4&amp;rft.description=Get%20started%20with%20one%20of%20our%20guides%2C%20or%20jump%20straight%20into%20the%20API%20documentation.&amp;rft.identifier=https%3A%2F%2Fdeveloper.github.com%2Fv4%2F&amp;rft.language=en"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[9]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“GitPython Documentation — GitPython 2.1.11 documentation.” [Online]. Available: <a href="https://gitpython.readthedocs.io/en/stable/">https://gitpython.readthedocs.io/en/stable/</a>. [Accessed: 29-Aug-2018].</div>
-  </div>
+  <div class="csl-entry">“GitPython Documentation — GitPython 2.1.11 Documentation.” Accessed August 29, 2018. <a href="https://gitpython.readthedocs.io/en/stable/">https://gitpython.readthedocs.io/en/stable/</a>.</div>
   <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=GitPython%20Documentation%20%E2%80%94%20GitPython%202.1.11%20documentation&amp;rft.identifier=https%3A%2F%2Fgitpython.readthedocs.io%2Fen%2Fstable%2F"></span>
-  <div class="csl-entry" style="clear: left; ">
-    <div class="csl-left-margin" style="float: left; padding-right: 0.5em;text-align: right; width: 2em;">[10]</div><div class="csl-right-inline" style="margin: 0 .4em 0 2.5em;">“Keras Documentation.” [Online]. Available: <a href="https://keras.io/">https://keras.io/</a>. [Accessed: 29-Aug-2018].</div>
-  </div>
+  <div class="csl-entry"><i>Keras: Deep Learning for Humans</i>. Python. 2015. Reprint, Keras, 2018. <a href="https://github.com/keras-team/keras">https://github.com/keras-team/keras</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=keras%3A%20Deep%20Learning%20for%20humans&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fkeras-team%2Fkeras&amp;rft.date=2018-08-21"></span>
+  <div class="csl-entry">“Keras Documentation.” Accessed August 29, 2018. <a href="https://keras.io/">https://keras.io/</a>.</div>
   <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=Keras%20Documentation&amp;rft.identifier=https%3A%2F%2Fkeras.io%2F"></span>
-</div></body></html>
-
+  <div class="csl-entry">Moses, Caleb. <i>Keras-Char-Rnn: A Keras Implementation of Andrej Karpathy’s Char-Rnn Model in Python. Based on Keras with the TensorFlow Backend</i>. Jupyter Notebook, 2018. <a href="https://github.com/mathematiguy/keras-char-rnn">https://github.com/mathematiguy/keras-char-rnn</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=keras-char-rnn%3A%20A%20Keras%20implementation%20of%20Andrej%20Karpathy's%20char-rnn%20model%20in%20Python.%20Based%20on%20Keras%20with%20the%20TensorFlow%20backend&amp;rft.rights=GPL-3.0&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fmathematiguy%2Fkeras-char-rnn&amp;rft.aufirst=Caleb&amp;rft.aulast=Moses&amp;rft.au=Caleb%20Moses&amp;rft.date=2018-08-10"></span>
+  <div class="csl-entry">Ozair, Sherjil. <i>Char-Rnn-Tensorflow:&nbsp; Multi-Layer Recurrent Neural Networks (LSTM, RNN) for Character-Level Language Models in Python Using Tensorflow</i>. Python, 2018. <a href="https://github.com/sherjilozair/char-rnn-tensorflow">https://github.com/sherjilozair/char-rnn-tensorflow</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=char-rnn-tensorflow%3A%20%20Multi-layer%20Recurrent%20Neural%20Networks%20(LSTM%2C%20RNN)%20for%20character-level%20language%20models%20in%20Python%20using%20Tensorflow&amp;rft.rights=MIT&amp;rft.identifier=https%3A%2F%2Fgithub.com%2Fsherjilozair%2Fchar-rnn-tensorflow&amp;rft.aufirst=Sherjil&amp;rft.aulast=Ozair&amp;rft.au=Sherjil%20Ozair&amp;rft.date=2018-08-21"></span>
+  <div class="csl-entry">“Sequence-to-Sequence Models.” TensorFlow. Accessed August 14, 2018. <a href="https://www.tensorflow.org/versions/r1.2/tutorials/seq2seq">https://www.tensorflow.org/versions/r1.2/tutorials/seq2seq</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=Sequence-to-Sequence%20Models&amp;rft.identifier=https%3A%2F%2Fwww.tensorflow.org%2Fversions%2Fr1.2%2Ftutorials%2Fseq2seq&amp;rft.language=en"></span>
+  <div class="csl-entry">“The Unreasonable Effectiveness of Recurrent Neural Networks.” Accessed August 6, 2018. <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>.</div>
+  <span class="Z3988" title="url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=webpage&amp;rft.title=The%20Unreasonable%20Effectiveness%20of%20Recurrent%20Neural%20Networks&amp;rft.identifier=http%3A%2F%2Fkarpathy.github.io%2F2015%2F05%2F21%2Frnn-effectiveness%2F"></span>
+</div></body>
 
 ## License
 MIT License
