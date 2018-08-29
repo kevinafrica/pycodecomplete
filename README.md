@@ -53,5 +53,7 @@ During training, batches are generated as follows:
 
 ## Modeling
 
+![RNN Architecture Image](./images/model.png "RNN Architecture")
+
 
 ## References
