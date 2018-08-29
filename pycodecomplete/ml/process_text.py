@@ -41,11 +41,6 @@ class CharVectorizer(BaseEstimator, TransformerMixin):
         self.file_list = []
         self.n_files = None
 
-    @property
-    def sequences(self):
-        return True
-
-    @property
     def steps_per_epoch(self, n=10):
         text_lengths = []
         file_paths = random.sample(self.file_list, n)
