@@ -62,7 +62,7 @@ def main():
                                      n_layers=settings.layers,
                                      hidden_layer_dim=settings.nodes_per_layer,
                                      step_size=settings.step_size,
-                                     n_gpu=settings.n_gpu
+                                     n_gpu=settings.n_gpu,
                                      model=pretrained_model)
 
     
