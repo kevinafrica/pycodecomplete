@@ -5,6 +5,7 @@ import string
 
 from keras.models import load_model
 from keras.models import Sequential
+from keras.utils import multi_gpu_model
 
 from rnn import pyCodeRNNBuilder
 from process_text import CharVectorizer
