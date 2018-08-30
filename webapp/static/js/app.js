@@ -17,8 +17,9 @@ let send_text_json = function (text) {
 };
 
 let display_prediction = function (data) {
+    $("textarea.code-output").html(data['prediction_1'])
     //display_txt = display_txt.replace(/\n/g, "<br />");
-    $("span#solution1").html(data['prediction_1'].replace(/\n/g, "<br />"))
+    //$("span#solution1").html(data['prediction_1'].replace(/\n/g, "<br />"))
     //$("span#solution2").html(data['prediction_2'].replace(/\n/g, "<br />"))
     //$("span#solution3").html(data['prediction_3'].replace(/\n/g, "<br />"))
     //$("span#solution4").html(data['prediction_4'].replace(/\n/g, "<br />"))
