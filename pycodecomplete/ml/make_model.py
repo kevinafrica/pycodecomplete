@@ -28,12 +28,16 @@ def main():
                         help='Number of Epochs to train the model')
     parser.add_argument('steps_per_epoch', type=int, action='store',
                         help='Steps per Epochs')
+    parser.add_argument('max_queue_size', type=int, action='store',
+                        help='Max queue size')
     parser.add_argument('-i', type=int, action='store', dest='initial_epoch',
                         help='Set initial epoch < epochs')
     parser.add_argument('-g', type=int, action='store', dest='n_gpu',
                         help='Number of GPUs')                    
     parser.add_argument('-m', action='store', dest='initial_model',
-                        help='Continue training an existing model')                       
+                        help='Continue training an existing model')
+    parser.add_argument('--multiprocessing', action='store_true',
+                        help='Enable Multiprocessing')                                           
     parser.add_argument('--version', action='version', version='%(prog)s 0.1')
 
     settings = parser.parse_args()
@@ -70,7 +74,10 @@ def main():
     model_builder.fit(steps_per_epoch=settings.steps_per_epoch,
                       batch_size=settings.batch_size,
                       epochs=settings.epochs,
-                      shuffle_source_files=True)
+                      shuffle_source_files=True,
+                      max_queue_size=settings.max_queue_size,
+                      multiprocessing=settings.multiprocessing,
+                      initial_epoch=settings.initial_epoch)
 
     
 def arg_error(parser, message):

@@ -143,7 +143,7 @@ class pyCodeRNNBuilder():
             print()
 
     def fit(self, steps_per_epoch=None, max_queue_size=1, batch_size=512,
-            epochs=5, initial_epoch=0, validation_steps=None,
+            epochs=5, initial_epoch=0, validation_steps=None, multiprocessing=False,
             shuffle_source_files=True):
 
         if steps_per_epoch is None:
@@ -161,6 +161,7 @@ class pyCodeRNNBuilder():
             max_queue_size=max_queue_size,
             epochs=epochs,
             initial_epoch=initial_epoch,
+            use_multiprocessing=True,
             verbose=1,
             validation_data=self.char_vectorizer.batch_generator(),
             validation_steps=validation_steps,
