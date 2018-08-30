@@ -58,6 +58,11 @@ class pyCodeRNNBuilder():
 
         if self.model is None:
             self.build_model()
+        elif self.n_gpu is not None:
+            print('Using', self.n_gpu, 'GPUs')
+            parallel_model = multi_gpu_model(model, gpus=self.n_gpu)
+            parallel_model.compile(loss='categorical_crossentropy', optimizer="adam")
+            self.model = parallel_model
         
 
     def build_model(self):
