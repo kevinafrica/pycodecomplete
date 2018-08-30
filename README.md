@@ -117,6 +117,7 @@ GitHub scr
 <img src="https://pandas.pydata.org/_static/pandas_logo.png" width="250">
 <img src="https://cdn-images-1.medium.com/max/1600/1*AD9ZSLXKAhZ-_WomszsmPg.png" width="250">
 <img src="https://camo.githubusercontent.com/630f51296667710aa4dd5959ec5cbc9c03bd48ac/687474703a2f2f7777772e6168612e696f2f6173736574732f6769746875622e37343333363932636162626661313332663334616462303334653739303966612e706e67" width="250">
+<img src="https://cdn-images-1.medium.com/max/2000/1*49DDRZhUWvVnH-QNHuSUSw.png" width="250">
 
 ## References
 
