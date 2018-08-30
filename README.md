@@ -3,8 +3,8 @@ Python code predictions using a Recurrent Neural Network
 
 ## Motivation
 Programmers spend a considerable amount of time fixing errors due to typos, retyping the same lines of code of a
-common task, or typing boilerplate code. PyCodeComplete increases a programmer's productivity by provding auto-complete
-suggestions to reduce the number of typos and the amount of repetitve typing.
+common task, or typing boilerplate code. PyCodeComplete increases a programmer's productivity by providing autocomplete
+suggestions to reduce the number of typos and the amount of repetitive typing.
 
 ## Product
 The user interface for PyCodeComplete allows a programmer to start typing Python code and receive immediate auto-complete
