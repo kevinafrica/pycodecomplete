@@ -24,7 +24,8 @@ def load_objects():
     global model
 
     char_vec = CharVectorizer(sequence_length=100)
-    model = load_model('/home/kevin/galvanize/pycodecomplete/pycodecomplete/ml/rnn4')
+    model = load_model(
+        '/home/kevin/galvanize/pycodecomplete/pycodecomplete/trained-models/100x100_4-nlayers_512-hiddenlayerdim_0.20-dropout_epoch012-loss1.4735-val-loss1.2830')
     code_gen = CodeGenerator(model, char_vec)
 
 
@@ -57,9 +58,17 @@ def sub_pre_ajax():
     #model = load_model('../pycodecomplete/trained-models/rnn')
     #code_gen = CodeGenerator(model, char_vec)
 
-    prediction = code_gen.predict_n_with_previous(text, 100)
+    prediction_1 = code_gen.predict_n_with_previous(text, 100, diversity=0.1)
+    prediction_2 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.2)
+    prediction_3 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.5)
+    prediction_4 = None #code_gen.predict_n_with_previous(text, 20, diversity=1.0)
     print('predict')
-    return jsonify({'prediction': prediction})
+    # return jsonify({'prediction': prediction})
+    return jsonify({'prediction_1': prediction_1,
+                    'prediction_2': prediction_2,
+                    'prediction_3': prediction_3,
+                    'prediction_4': prediction_4})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=False)

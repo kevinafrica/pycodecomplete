@@ -17,21 +17,37 @@ let send_text_json = function (text) {
 };
 
 let display_prediction = function (data) {
-    $("span#solution").html(data['prediction'])
+    //display_txt = display_txt.replace(/\n/g, "<br />");
+    $("span#solution1").html(data['prediction_1'].replace(/\n/g, "<br />"))
+    //$("span#solution2").html(data['prediction_2'].replace(/\n/g, "<br />"))
+    //$("span#solution3").html(data['prediction_3'].replace(/\n/g, "<br />"))
+    //$("span#solution4").html(data['prediction_4'].replace(/\n/g, "<br />"))
 };
 
 $(function ()
 {
     $('textarea#code-input').keyup(function () {
+
+        delay(function(){
+            
         let text = $("textarea#code-input").val()
         console.log(text)
 
         let text_json = get_text_data();
         send_text_json(text_json);
+
+        
+          }, 1000 );
     });
 });
 
-
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
 
 
 $(document).ready(function() {
