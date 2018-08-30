@@ -76,8 +76,8 @@ def main():
                       epochs=settings.epochs,
                       shuffle_source_files=True,
                       max_queue_size=settings.max_queue_size,
-                      multiprocessing=settings.multiprocessing,
-                      initial_epoch=settings.initial_epoch)
+                      multiprocessing=settings.multiprocessing)
+                      #initial_epoch=settings.initial_epoch)
 
     
 def arg_error(parser, message):
