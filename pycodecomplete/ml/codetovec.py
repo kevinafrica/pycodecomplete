@@ -41,7 +41,7 @@ class PyCodeVectors():
         self.file_list = self._generate_filelist(self.source_directory)
         self.n_files = len(self.file_list)
 
-        code_string = self.concatenate_source_code(self.file_list[:int(p*n_files)])
+        code_string = self.concatenate_source_code(self.file_list[:int(p*self.n_files)])
 
         self.source_length = len(code_string)
 
