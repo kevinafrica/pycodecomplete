@@ -161,7 +161,7 @@ class pyCodeRNNBuilder():
             max_queue_size=max_queue_size,
             epochs=epochs,
             initial_epoch=initial_epoch,
-            use_multiprocessing=True,
+            use_multiprocessing=False,
             verbose=1,
             validation_data=self.char_vectorizer.batch_generator(),
             validation_steps=validation_steps,

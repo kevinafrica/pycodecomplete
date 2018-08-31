@@ -58,7 +58,7 @@ def sub_pre_ajax():
     #model = load_model('../pycodecomplete/trained-models/rnn')
     #code_gen = CodeGenerator(model, char_vec)
 
-    prediction_1 = code_gen.predict_n_with_previous(text, 20, diversity=0.1)
+    prediction_1 = code_gen.predict_n_with_previous(text, 5, diversity=0.1)
     prediction_2 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.2)
     prediction_3 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.5)
     prediction_4 = None #code_gen.predict_n_with_previous(text, 20, diversity=1.0)

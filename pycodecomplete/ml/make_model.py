@@ -75,8 +75,8 @@ def main():
                       batch_size=settings.batch_size,
                       epochs=settings.epochs,
                       shuffle_source_files=True,
-                      max_queue_size=settings.max_queue_size,
-                      multiprocessing=settings.multiprocessing)
+                      max_queue_size=settings.max_queue_size)
+                      #multiprocessing=settings.multiprocessing)
                       #initial_epoch=settings.initial_epoch)
 
     
