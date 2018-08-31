@@ -36,12 +36,12 @@ class PyCodeVectors():
     def fit(self):
         return self
 
-    def transform(self, source_directory, outfile=None):
+    def transform(self, source_directory, p=0.5, outfile=None):
         self.source_directory = source_directory
         self.file_list = self._generate_filelist(self.source_directory)
         self.n_files = len(self.file_list)
 
-        code_string = self.concatenate_source_code(self.file_list)
+        code_string = self.concatenate_source_code(self.file_list[:int(p*n_files)])
 
         self.source_length = len(code_string)
 
