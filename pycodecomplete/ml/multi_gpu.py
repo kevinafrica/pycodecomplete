@@ -1,4 +1,8 @@
-from keras.layers import merge
+# adapted from: https://github.com/kuza55/keras-extras
+# with Keras 2.x fix: https://github.com/kuza55/keras-extras/pull/19
+# and issue #23 (Model Saving/Checkpointing incompatibilities)
+
+from keras.layers.merge import Concatenate
 from keras.layers.core import Lambda
 from keras.models import Model
 
@@ -41,6 +45,22 @@ def make_parallel(model, gpu_count):
     with tf.device('/cpu:0'):
         merged = []
         for outputs in outputs_all:
-            merged.append(merge(outputs, mode='concat', concat_axis=0))
-            
-        return Model(input=model.inputs, output=merged)
+            merged.append(Concatenate(axis=0)(outputs))
+
+        # update model saving scheme to save underlying model rather than parallel
+        new_model = Model(inputs=model.inputs, outputs=merged)
+        save_model_function = type(model.save)
+
+        def save_old_model(self_, model_path, overwrite=True):
+            model.save(model_path, overwrite)
+        new_model.save = save_model_function(save_old_model, new_model)
+        # update weight saving scheme to save underlying model weights
+
+        save_weights_function = type(model.save_weights)
+
+        def save_old_weights(self_, weights_path, overwrite=True):
+            model.save_weights(weights_path, overwrite)
+        
+        new_model.save_weights = save_weights_function(save_old_weights, new_model)
+        
+        return new_model
