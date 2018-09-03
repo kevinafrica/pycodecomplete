@@ -1,6 +1,9 @@
 # PyCodeComplete
 Python code predictions using a Recurrent Neural Network
 
+## Table of Contents
+[Motivation](#motivation)
+
 ## Motivation
 Programmers spend a considerable amount of time fixing errors due to typos, retyping the same lines of code of a
 common task, or typing boilerplate code. PyCodeComplete increases a programmer's productivity by providing autocomplete
