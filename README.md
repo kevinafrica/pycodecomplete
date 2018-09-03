@@ -73,6 +73,7 @@ Clone this repository with the command
 ```
 git clone https://github.com/kevinafrica/pycodecomplete.git
 ```
+The repository has the following structure. GitHub scaping and cleaning are located in the ./pycodecomplete/mscraping folder. Code for RNN models and training are contained in the ./pycodecomplete/ml folder. Flask website application files are located in the ./pycodecomplete/webapp folder
 ```
 .
 ├── LICENSE
@@ -112,10 +113,10 @@ git clone https://github.com/kevinafrica/pycodecomplete.git
     └── templates
         └── template.html
 ```
-Recreate the Corpus with the command
-
+Recreating the corpus from GitHub requires a [GitHub personal access token](https://github.com/settings/tokens/new). Create a token and save the token file to your local computer.  
+Run the following command to generate the corpus with 1000 Python repos
 ```
-GitHub scr
+python3
 ```
 
 ## Future Work
