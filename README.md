@@ -4,6 +4,13 @@ Python code predictions using a Recurrent Neural Network
 ## Table of Contents
 1. [Motivation](#motivation)
 2. [Product](#product)
+3. [Gathering and Cleaning Data](#gathering-and-cleaning-data)
+4. [Data Preparation](#data-preparation)
+5. [Modeling](#modeling)
+6. [Usage](#usage)
+7. [Future Work](#future-work)
+8. [References](#references)
+9. [License](#license)
 
 ## Motivation
 Programmers spend a considerable amount of time fixing errors due to typos, retyping the same lines of code of a
