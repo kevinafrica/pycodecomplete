@@ -3,6 +3,7 @@ import io
 import os
 import numpy as np
 import string
+import multiprocessing
 
 
 class PyCodeVectors():
@@ -36,13 +37,14 @@ class PyCodeVectors():
     def fit(self):
         return self
 
-    def transform(self, source_directory, p=0.5, outfile=None):
+    def transform(self, source_directory, outfile=None, p=1.0):
         self.source_directory = source_directory
         self.file_list = self._generate_filelist(self.source_directory)
-        #self.n_files = len(self.file_list)
+        # self.n_files = len(self.file_list)
         self.n_files = int(p * len(self.file_list))
 
-        code_string = self.concatenate_source_code(self.file_list[:self.n_files])
+        code_string = self.concatenate_source_code(
+            self.file_list[:self.n_files])
 
         self.source_length = len(code_string)
 
@@ -52,9 +54,9 @@ class PyCodeVectors():
             if os.path.isdir(os.path.dirname(outfile)):
                 np.save(outfile + '_X', X)
                 np.save(outfile + '_y', y)
-        
+
         return X, y
-        
+
     def _generate_filelist(self, directory):
         if os.path.isdir(directory):
             file_list = glob.iglob(os.path.join(
@@ -78,9 +80,43 @@ class PyCodeVectors():
 
         return code_string
 
-    def generate_dataset(self, code_string):
+    def read_source_code_parallel(self, file):
+        code_string = ''
+        with io.open(file, 'r', encoding=self.encoding, errors=self.decode_errors) as infile:
+            code_string += self.pad_token * self.sequence_length + infile.read()
+            # return infile.read()
+        return code_string
 
-        #n_samples = source_length - n_files*seq_length - seq_length
+    def vectorize(self, code_string):
+        source_length = len(code_string)
+        n_samples = source_length - self.sequence_length
+
+        X = np.zeros((n_samples, self.sequence_length,
+                      self.vocabulary_length), dtype=bool)
+        y = np.zeros((n_samples, self.vocabulary_length), dtype=bool)
+
+        for sample_idx in range(n_samples):
+            for char_idx in range(self.sequence_length):
+                X[sample_idx, char_idx, self.char_to_idx[code_string[sample_idx + char_idx]]] = True
+            y[sample_idx, self.char_to_idx[code_string[sample_idx + self.sequence_length]]] = True
+        
+        return X, y
+
+    def concatenate_source_code_parallel(self, file_list):
+        pool = multiprocessing.Pool(multiprocessing.cpu_count())
+        return ''.join(pool.map(self.read_source_code_parallel, file_list))
+
+    def _vectorize_code_parallel_helper(self, file):
+        return self.vectorize(self.read_source_code_parallel(file))
+
+    def vectorize_code_parallel(self, file_list):
+        pool = multiprocessing.Pool(multiprocessing.cpu_count())
+
+        Xs, ys = zip(*pool.map(self._vectorize_code_parallel_helper, file_list))
+
+        return np.concatenate(Xs, axis=0), np.concatenate(ys, axis=0)
+
+    def generate_dataset(self, code_string):
         source_length = len(code_string)
         n_samples = source_length - self.n_files * self.sequence_length
 
@@ -106,3 +142,6 @@ class PyCodeVectors():
                 source_idx += self.step_size
 
         return X, y
+
+
+#k4O9TllzZfRe3O4ez6Ei

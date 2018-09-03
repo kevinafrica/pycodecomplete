@@ -52,6 +52,8 @@ During training, batches are generated as follows:
 
 ## Modeling
 
+The model consists of 4 fully connected layers of 512 LSTM units each. Between each LSTM layer are layers of 512 dropout nodes
+with a dropout probability of 0.2 for regularization, to prevent overfitting. Finally there is a layer of 100 nodes, one for each character in the vocabulary. Finally there is a softmax node to create a probability distribution of the characters. 
 ![RNN Architecture Image](./images/model.png "RNN Architecture")
 
 ## Usage
