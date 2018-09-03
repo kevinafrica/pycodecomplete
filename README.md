@@ -115,9 +115,38 @@ The repository has the following structure. GitHub scaping and cleaning are loca
 ```
 Recreating the corpus from GitHub requires a [GitHub personal access token](https://github.com/settings/tokens/new). Create a token and save the token file to your local computer.  
 
-Run the following command to generate the corpus with 1000 Python repos
+Run the following command to generate the corpus with 1000 Python repos:
 ```
-python3 ./pycodecomplete/scraping/scrape_github.py -f /path/to/github/token /cloned/repo/destination/path 1000
+python ./pycodecomplete/scraping/scrape_github.py -f /path/to/github/token /cloned/repo/destination/path 1000
+```
+
+Once the script has completed cloning the repos, deleting unncesessary files and cleaning the .py file, you can start training a new RNN model with the following command:
+```
+python ./pycodecomplete/ml/make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 6000 1
+```
+The arguements are
+1. Path to save serialized RNN models. A trained model is saves after the completion of each epoch.
+2. Path to the cloned GitHub repositories from which to train the model on
+3. Sequence length (100 character long sequence)
+4. Number of layers (4 layers of LSTM nodes)
+5. Number of nodes per layer (512 nodes per layer)
+6. Number of Epochs to train
+7. Number of steps per Epoch (Should be Number of total characters in the corpus divided by batch size)
+8. Max Queue Size (Number of batches to queue in RAM)
+
+Additionally you can continue training an existing model with the addition of the -m option:
+```
+-m /path/to/existing/model
+```
+and train on a number of GPUs with the -g option:
+```
+-g 4
+```
+for a computer with 4 GPUs
+
+Finally once a model is complete you can start the flask app with the command:
+```
+./pycc.sh
 ```
 
 ## Future Work
