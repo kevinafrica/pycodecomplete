@@ -3,6 +3,7 @@ Python code predictions using a Recurrent Neural Network
 
 ## Table of Contents
 [Motivation](#motivation)
+[Motivation](#product)
 
 ## Motivation
 Programmers spend a considerable amount of time fixing errors due to typos, retyping the same lines of code of a
