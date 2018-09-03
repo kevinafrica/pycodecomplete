@@ -116,7 +116,7 @@ The repository has the following structure. GitHub scaping and cleaning are loca
 Recreating the corpus from GitHub requires a [GitHub personal access token](https://github.com/settings/tokens/new). Create a token and save the token file to your local computer.  
 Run the following command to generate the corpus with 1000 Python repos
 ```
-python3
+python3 ./pycodecomplete/scraping/scrape_github.py -f /path/to/github/token /cloned/repo/destination/path 1000
 ```
 
 ## Future Work
