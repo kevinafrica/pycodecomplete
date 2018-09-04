@@ -35,7 +35,7 @@ class PyCodeVectors():
         self.source_length = None
 
     def fit(self, source_directory):
-        self.file_list = self._generate_filelist(self.source_directory) 
+        self.file_list = self._generate_filelist(source_directory) 
         self.n_files = len(self.file_list)
         self.source = self.concatenate_source_code_parallel(self.file_list)
         self.source_length = len(self.source)
@@ -162,7 +162,8 @@ class PyCodeVectors():
         if batch_count is None:
             batch_count = self.source_length // batch_size
 
-        print('Batch Size:', batch_size, 'Batch Count:', batch_count)
+
+        print('Generating Data with Batch Size:', batch_size, 'Batch Count:', batch_count)
 
         while True:
             for batch_idx in range(batch_count):

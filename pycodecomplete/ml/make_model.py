@@ -67,8 +67,6 @@ def main():
                                      n_gpu=settings.n_gpu,
                                      model=pretrained_model)
 
-    
-    print('Starting Training...')
     model_builder.fit(steps_per_epoch=settings.steps_per_epoch,
                       batch_size=settings.batch_size,
                       epochs=settings.epochs,

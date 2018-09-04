@@ -162,6 +162,13 @@ class pyCodeRNNBuilder():
         if shuffle_source_files:
             self.char_vectorizer.shuffle_files()
 
+        print('Starting Training...')
+        print('Batch Size =', batch_size)
+        print('Number of Batches =', steps_per_epoch)
+        print('Max Batches to Queue in RAM =', max_queue_size)
+        print('Epochs =', epochs)
+        print('Intial Epcoh =', initial_epoch)
+
         self.model.fit_generator(
             #generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
             generator=self.pycodevectors.data_generator(batch_size=batch_size),
