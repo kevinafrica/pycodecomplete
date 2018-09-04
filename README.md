@@ -22,13 +22,13 @@ The user interface for PyCodeComplete allows a programmer to start typing Python
 suggestions that the programmer can then implement in his or her project. By using the auto-complete suggestions the
 user can save time and avoid errors.
 
-The code suggestions are provided by a Recurrent Nerual Network (RNN) that was trained on 1000 Python projects taken from
+The code suggestions are provided by a Recurrent Neural Network (RNN) that was trained on 1000 Python projects taken from
 GitHub. 
 
 ## Gathering and Cleaning Data
 
 Using the [GitHub GraphQL API v4](https://developer.github.com/v4/) I performed query to search for Python repositiories.
-To ensure that only high quality Python code is used to train the RNN, I limited the seach to repositioreies with over
+To ensure that only high quality Python code is used to train the RNN, I limited the search to repositiories with over
 1000 stars. The query results are an stored on Amazon Aurora Relational Database with the following columns:
 
 * Repository Name
@@ -53,8 +53,8 @@ with 4 NVIDIA GRID K520 GPUs. This allowed me to train the RNN on batches of 512
 
 During training, batches are generated as follows:
 
-1. Read the next .py file from the collection of GitHub repositiories
-2. Encode the each character as a one-hot encoded vector of length 100, since I limited the allowable charcters to 
+1. Read the next .py file from the collection of GitHub repositories
+2. Encode the each character as a one-hot encoded vector of length 100, since I limited the allowable characters to 
    python's strings.printable list of 100 characters. For example, the character 'a' is encoded as a 100 dimensional vector
    with all 0's with the exception of the 11th component which is 1.
 3. 100 characters are assembled into a numpy array, resulting in a feature matrix of shape 100 x 100.
@@ -73,7 +73,7 @@ Clone this repository with the command
 ```
 git clone https://github.com/kevinafrica/pycodecomplete.git
 ```
-The repository has the following structure. GitHub scaping and cleaning are located in the ./pycodecomplete/mscraping folder. Code for RNN models and training are contained in the ./pycodecomplete/ml folder. Flask website application files are located in the ./pycodecomplete/webapp folder
+The repository has the following structure. GitHub scraping and cleaning are located in the ./pycodecomplete/scraping folder. Code for RNN models and training are contained in the ./pycodecomplete/ml folder. Flask website application files are located in the ./pycodecomplete/webapp folder
 ```
 .
 ├── LICENSE
@@ -113,11 +113,11 @@ Run the following command to generate the corpus with 1000 Python repos:
 python ./pycodecomplete/scraping/scrape_github.py -f /path/to/github/token /cloned/repo/destination/path 1000
 ```
 
-Once the script has completed cloning the repos, deleting unncesessary files and cleaning the .py file, you can start training a new RNN model with the following command:
+Once the script has completed cloning the repos, deleting unnecessary files and cleaning the .py file, you can start training a new RNN model with the following command:
 ```
 python ./pycodecomplete/ml/make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 6000 1
 ```
-The arguements are
+The arguments are
 1. Path to save serialized RNN models. A trained model is saves after the completion of each epoch.
 2. Path to the cloned GitHub repositories from which to train the model on
 3. Sequence length (100 character long sequence)
