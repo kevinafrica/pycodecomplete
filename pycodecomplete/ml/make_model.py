@@ -33,7 +33,9 @@ def main():
     parser.add_argument('-i', type=int, action='store', dest='initial_epoch',
                         help='Set initial epoch < epochs')
     parser.add_argument('-g', type=int, action='store', dest='n_gpu',
-                        help='Number of GPUs')                    
+                        help='Number of GPUs')
+    parser.add_argument('-w', type=int, action='store', dest='n_workers',
+                        help='Number of Workers')                                                       
     parser.add_argument('-m', action='store', dest='initial_model',
                         help='Continue training an existing model')
     parser.add_argument('--multiprocessing', action='store_true',
@@ -71,7 +73,8 @@ def main():
                       batch_size=settings.batch_size,
                       epochs=settings.epochs,
                       shuffle_source_files=True,
-                      max_queue_size=settings.max_queue_size)
+                      max_queue_size=settings.max_queue_size,
+                      workers=settings.n_workers)
                       #multiprocessing=settings.multiprocessing)
                       #initial_epoch=settings.initial_epoch)
 
