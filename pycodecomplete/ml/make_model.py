@@ -34,7 +34,7 @@ def main():
                         help='Set initial epoch < epochs')
     parser.add_argument('-g', type=int, action='store', dest='n_gpu',
                         help='Number of GPUs')
-    parser.add_argument('-w', type=int, action='store', dest='n_workers',
+    parser.add_argument('-w', type=int, action='store', dest='n_workers', default=1,
                         help='Number of Workers')                                                       
     parser.add_argument('-m', action='store', dest='initial_model',
                         help='Continue training an existing model')

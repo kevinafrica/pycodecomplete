@@ -142,7 +142,8 @@ Finally once a model is complete you can start the flask app with the command:
 ```
 
 ## Future Work
-
+- Create Jupyter Notebook or VSCode extension that provides code predictions
+- Additional training on multiple GPUs
 
 ## Tech Stack
 
