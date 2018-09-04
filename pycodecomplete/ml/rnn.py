@@ -52,6 +52,7 @@ class pyCodeRNNBuilder():
         self.char_vectorizer.fit(pycode_directory)
 
         self.pycodevectors = PyCodeVectors()
+        self.pycodevectors.fit(pycode_directory)
 
         self.checkpoint = ModelCheckpoint(
             self.save_pickle_path % (self.sequence_length, self.vocabulary_size,
@@ -149,8 +150,11 @@ class pyCodeRNNBuilder():
             epochs=5, initial_epoch=0, validation_steps=None, multiprocessing=False,
             shuffle_source_files=True):
 
+        #if steps_per_epoch is None:
+        #    steps_per_epoch = self.char_vectorizer.steps_per_epoch
+
         if steps_per_epoch is None:
-            steps_per_epoch = self.char_vectorizer.steps_per_epoch
+            steps_per_epoch = self.pycodevectors.source_length // batch_size
 
         if validation_steps is None:
             validation_steps = 1
@@ -159,13 +163,14 @@ class pyCodeRNNBuilder():
             self.char_vectorizer.shuffle_files()
 
         self.model.fit_generator(
-            generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
+            #generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
+            generator=self.pycodevectors.data_generator(batch_size=batch_size),
             steps_per_epoch=steps_per_epoch,
             max_queue_size=max_queue_size,
             epochs=epochs,
             initial_epoch=initial_epoch,
             use_multiprocessing=False,
             verbose=1,
-            validation_data=self.char_vectorizer.batch_generator(),
+            validation_data=self.pycodevectors.data_generator(batch_size=batch_size),
             validation_steps=validation_steps,
             callbacks=[self.checkpoint])

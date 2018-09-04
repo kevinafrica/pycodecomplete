@@ -157,10 +157,10 @@ class PyCodeVectors():
 
         return X, y
 
-    def data_generator_parallel(self, batch_size, batch_count=None, ignore=['\x0c']):
+    def data_generator(self, batch_size, batch_count=None, ignore=['\x0c']):
         '''Batch generator for training RNN'''
         if batch_count is None:
-            batch_count = len(self.source) // batch_size
+            batch_count = self.source_length // batch_size
 
         while True:
             for batch_idx in range(batch_count):
