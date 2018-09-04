@@ -117,7 +117,7 @@ Once the script has completed cloning the repos, deleting unnecessary files and 
 ```
 python ./pycodecomplete/ml/make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 6000 1
 ```
-The arguments are
+The arguments are:
 1. Path to save serialized RNN models. A trained model is saves after the completion of each epoch.
 2. Path to the cloned GitHub repositories from which to train the model on
 3. Sequence length (100 character long sequence)
