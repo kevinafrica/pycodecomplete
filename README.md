@@ -83,10 +83,10 @@ The repository has the following structure. GitHub scaping and cleaning are loca
 │   │   ├── code_generation.py
 │   │   ├── make_model.py
 │   │   ├── process_text.py
-│   │   ├── rnn.py
+│   │   └── rnn.py
 │   ├── scraping
 │   │   ├── __init__.py
-│   │   ├── scrape_github.py
+│   │   └── scrape_github.py
 │   ├── tests
 │   └── trained-models
 ├── README.md
@@ -98,18 +98,11 @@ The repository has the following structure. GitHub scaping and cleaning are loca
     ├── requirements.txt
     ├── static
     │   ├── css
-    │   │   ├── jquery.atwho.css
-    │   │   ├── jquery.atwho.min.css
-    │   │   └── simple.css
+    │   │   └── main.css
     │   ├── favicon.ico
     │   └── js
     │       ├── app.js
-    │       ├── jquery-3.3.1.js
-    │       ├── jquery-3.3.1.min.js
-    │       ├── jquery.atwho.js
-    │       ├── jquery.atwho.min.js
-    │       ├── jquery.caret.js
-    │       └── jquery.caret.min.js
+    │       └── jquery-3.3.1.js
     └── templates
         └── template.html
 ```
