@@ -115,7 +115,7 @@ python ./pycodecomplete/scraping/scrape_github.py -f /path/to/github/token /clon
 
 Once the script has completed cloning the repos, deleting unnecessary files and cleaning the .py file, you can start training a new RNN model with the following command:
 ```
-python ./pycodecomplete/ml/make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 6000 1
+python ./pycodecomplete/ml/make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 1
 ```
 The arguments are:
 1. Path to save serialized RNN models. A trained model is saves after the completion of each epoch.
@@ -124,8 +124,7 @@ The arguments are:
 4. Number of layers (4 layers of LSTM nodes)
 5. Number of nodes per layer (512 nodes per layer)
 6. Number of Epochs to train
-7. Number of steps per Epoch (Should be Number of total characters in the corpus divided by batch size)
-8. Max Queue Size (Number of batches to queue in RAM)
+7. Max Queue Size (Number of batches to queue in RAM)
 
 Additionally you can continue training an existing model with the addition of the -m option:
 ```

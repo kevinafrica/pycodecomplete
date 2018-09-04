@@ -158,32 +158,28 @@ class PyCodeVectors():
         return X, y
 
     def data_generator(self, batch_size, batch_count=None, ignore=['\x0c']):
-        '''Batch generator for training RNN'''
+    
         if batch_count is None:
-            batch_count = self.source_length // batch_size
-
-
-        print('Generating Data with Batch Size:', batch_size, 'Batch Count:', batch_count)
-
+            batch_count = (self.source_length - self.sequence_length) // batch_size
+        
         while True:
+            char_idx = 0
             for batch_idx in range(batch_count):
-                X = np.zeros((batch_size, self.sequence_length,
-                              self.vocabulary_length), dtype=bool)
+                X = np.zeros((batch_size, self.sequence_length, self.vocabulary_length), dtype=bool)
                 y = np.zeros((batch_size, self.vocabulary_length))
+                
+                sample_idx = 0
+                while sample_idx < batch_size:
+                    
+                    if self.source[char_idx + self.sequence_length] not in ignore:
+                        for seq_pos in range(self.sequence_length):
+                            X[sample_idx, seq_pos, self.char_to_idx[self.source[char_idx + seq_pos]]] = True
+                        y[sample_idx, self.char_to_idx[self.source[char_idx + self.sequence_length]]] = True
+                        sample_idx +=1
 
-                batch_offset = batch_size * batch_idx
-
-                for sample_idx in range(batch_size):
-                    start_idx = batch_offset + sample_idx
-
-                    # Check if target is padding character, if so reset start index to this position
-                    while self.source[start_idx + self.sequence_length] in ignore:
-                        start_idx += self.sequence_length
-
-                    for seq_pos in range(self.sequence_length):
-                        X[sample_idx, seq_pos,
-                            self.char_to_idx[self.source[start_idx + seq_pos]]] = True
-                    y[sample_idx, self.char_to_idx[self.source[start_idx +
-                                                          self.sequence_length]]] = True
-
+                    if char_idx == self.source_length  - self.sequence_length - 1:
+                        char_idx = 0
+                    else:
+                        char_idx += 1
+                        
                 yield X, y
