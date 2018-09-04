@@ -34,8 +34,12 @@ class PyCodeVectors():
         self.n_files = None
         self.source_length = None
 
-    def fit(self):
-        return self
+    def fit(self, source_directory):
+        self.file_list = self._generate_filelist(self.source_directory) 
+        self.n_files = len(self.file_list)
+        self.source = self.concatenate_source_code_parallel(self.file_list)
+        self.source_length = len(self.source)
+
 
     def transform(self, source_directory, outfile=None, p=1.0):
         '''Convert .py files in source directory to feature and target numpy arrays
@@ -153,12 +157,10 @@ class PyCodeVectors():
 
         return X, y
 
-    def data_generator_parallel(self, file_list, batch_size, batch_count=None, ignore=['\x0c']):
+    def data_generator_parallel(self, batch_size, batch_count=None, ignore=['\x0c']):
         '''Batch generator for training RNN'''
-        source = self.concatenate_source_code_parallel(file_list)
-
         if batch_count is None:
-            batch_count = len(source) // batch_size
+            batch_count = len(self.source) // batch_size
 
         while True:
             for batch_idx in range(batch_count):
@@ -172,13 +174,13 @@ class PyCodeVectors():
                     start_idx = batch_offset + sample_idx
 
                     # Check if target is padding character, if so reset start index to this position
-                    while source[start_idx + self.sequence_length] in ignore:
+                    while self.source[start_idx + self.sequence_length] in ignore:
                         start_idx += self.sequence_length
 
                     for seq_pos in range(self.sequence_length):
                         X[sample_idx, seq_pos,
-                            self.char_to_idx[source[start_idx + seq_pos]]] = True
-                    y[sample_idx, self.char_to_idx[source[start_idx +
+                            self.char_to_idx[self.source[start_idx + seq_pos]]] = True
+                    y[sample_idx, self.char_to_idx[self.source[start_idx +
                                                           self.sequence_length]]] = True
 
                 yield X, y
