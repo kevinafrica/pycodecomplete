@@ -18,22 +18,20 @@ parser = ArgumentParser(description='PyCodeComplete WebApp')
 parser.add_argument('model_file', action='store',
                     help='Trained RNN model file')
 parser.add_argument('predict_n', type=int, action='store',
-                    help='Number of characters to predict')                    
+                    help='Number of characters to predict')
 settings = parser.parse_args()
 
 char_vec = None
 model = None
 code_gen = None
 
+
 @app.before_first_request
 def load_objects():
     global char_vec
     global code_gen
     global model
-
     char_vec = CharVectorizer(sequence_length=100)
-    #model = load_model(
-    #    '/home/kevin/galvanize/pycodecomplete/pycodecomplete/trained-models/100x100_4-nlayers_512-hiddenlayerdim_0.20-dropout_epoch012-loss1.4735-val-loss1.2830')
     model = load_model(settings.model_file)
     code_gen = CodeGenerator(model, char_vec)
 
@@ -60,17 +58,14 @@ def sub_pre_ajax():
     user_data = request.json
     text = str(user_data['text'])
 
-    # with open('model.pkl', 'rb') as f:
-    #    model = pickle.load(f)
-
-    #char_vec = CharVectorizer(sequence_length=100)
-    #model = load_model('../pycodecomplete/trained-models/rnn')
-    #code_gen = CodeGenerator(model, char_vec)
-
-    prediction_1 = code_gen.predict_n_with_previous(text, settings.predict_n, diversity=0.1)
-    prediction_2 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.2)
-    prediction_3 = None #code_gen.predict_n_with_previous(text, 20, diversity=0.5)
-    prediction_4 = None #code_gen.predict_n_with_previous(text, 20, diversity=1.0)
+    prediction_1 = code_gen.predict_n_with_previous(
+        text, settings.predict_n, diversity=0.1)
+    # code_gen.predict_n_with_previous(text, 20, diversity=0.2)
+    prediction_2 = None
+    # code_gen.predict_n_with_previous(text, 20, diversity=0.5)
+    prediction_3 = None
+    # code_gen.predict_n_with_previous(text, 20, diversity=1.0)
+    prediction_4 = None
     print('predict')
     # return jsonify({'prediction': prediction})
     return jsonify({'prediction_1': prediction_1,
