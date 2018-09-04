@@ -162,6 +162,8 @@ class PyCodeVectors():
         if batch_count is None:
             batch_count = self.source_length // batch_size
 
+        print('Batch Size:', batch_size, 'Batch Count:', batch_count)
+
         while True:
             for batch_idx in range(batch_count):
                 X = np.zeros((batch_size, self.sequence_length,

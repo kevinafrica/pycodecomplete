@@ -26,10 +26,10 @@ def main():
                         help='')
     parser.add_argument('epochs', type=int, action='store',
                         help='Number of Epochs to train the model')
-    parser.add_argument('steps_per_epoch', type=int, action='store',
-                        help='Steps per Epochs')
     parser.add_argument('max_queue_size', type=int, action='store',
                         help='Max queue size')
+    parser.add_argument('-s', type=int, action='store', dest='steps_per_epoch',
+                        help='Steps per Epochs')                    
     parser.add_argument('-i', type=int, action='store', dest='initial_epoch',
                         help='Set initial epoch < epochs')
     parser.add_argument('-g', type=int, action='store', dest='n_gpu',
