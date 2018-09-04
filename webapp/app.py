@@ -10,23 +10,33 @@ from keras import Sequential
 from pycodecomplete.ml.process_text import CharVectorizer
 from pycodecomplete.ml.code_generation import CodeGenerator
 
+from argparse import ArgumentParser
+
 app = Flask(__name__.split('.')[0])
 
-char_vec = None
-model = None
-code_gen = None
+parser = ArgumentParser(description='PyCodeComplete WebApp')
+parser.add_argument('model_file', action='store',
+                    help='Trained RNN model file')
+parser.add_argument('predict_n', action='store',
+                    help='Number of characters to predict')                    
+settings = parser.parse_args()
 
+char_vec = CharVectorizer(sequence_length=settings.predict_n)
+model = model = load_model(settings.model_file)
+code_gen = CodeGenerator(model, char_vec)
 
 @app.before_first_request
 def load_objects():
-    global char_vec
-    global code_gen
-    global model
+    pass
+    #global char_vec
+    #global code_gen
+    #global model
 
-    char_vec = CharVectorizer(sequence_length=100)
-    model = load_model(
-        '/home/kevin/galvanize/pycodecomplete/pycodecomplete/trained-models/100x100_4-nlayers_512-hiddenlayerdim_0.20-dropout_epoch012-loss1.4735-val-loss1.2830')
-    code_gen = CodeGenerator(model, char_vec)
+    #char_vec = CharVectorizer(sequence_length=100)
+    #model = load_model(
+    #    '/home/kevin/galvanize/pycodecomplete/pycodecomplete/trained-models/100x100_4-nlayers_512-hiddenlayerdim_0.20-dropout_epoch012-loss1.4735-val-loss1.2830')
+    #model = load_model(settings.model_file)
+    #code_gen = CodeGenerator(model, char_vec)
 
 
 @app.route('/', methods=['GET'])
