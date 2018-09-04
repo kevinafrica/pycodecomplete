@@ -142,6 +142,3 @@ class PyCodeVectors():
                 source_idx += self.step_size
 
         return X, y
-
-
-#k4O9TllzZfRe3O4ez6Ei
