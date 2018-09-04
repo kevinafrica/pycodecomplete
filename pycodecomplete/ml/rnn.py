@@ -20,6 +20,7 @@ from keras.utils.data_utils import get_file
 from keras.utils import multi_gpu_model
 
 from process_text import CharVectorizer
+from codetovec import PyCodeVectors
 
 
 class pyCodeRNNBuilder():
@@ -49,6 +50,8 @@ class pyCodeRNNBuilder():
                                               step_size=self.step_size)
 
         self.char_vectorizer.fit(pycode_directory)
+
+        self.pycodevectors = PyCodeVectors()
 
         self.checkpoint = ModelCheckpoint(
             self.save_pickle_path % (self.sequence_length, self.vocabulary_size,

@@ -57,8 +57,6 @@ def main():
     else:
         pretrained_model = None
 
-    print(str(settings)[10:-1])
-
     print('Creating Model Trainer...')
     model_builder = pyCodeRNNBuilder(settings.sequence_length,
                                      settings.destination,
