@@ -176,6 +176,7 @@ class pyCodeRNNBuilder():
             max_queue_size=max_queue_size,
             epochs=epochs,
             initial_epoch=initial_epoch,
+            workers=30,
             use_multiprocessing=False,
             verbose=1,
             validation_data=self.pycodevectors.data_generator(batch_size=batch_size),
