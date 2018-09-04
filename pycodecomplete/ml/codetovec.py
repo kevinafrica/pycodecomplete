@@ -162,6 +162,8 @@ class PyCodeVectors():
         if batch_count is None:
             batch_count = (self.source_length - self.sequence_length) // batch_size
         
+        print('Generating Data with Batch Size:', batch_size, 'Batch Count:', batch_count)
+
         while True:
             char_idx = 0
             for batch_idx in range(batch_count):
