@@ -27,8 +27,8 @@ GitHub.
 
 ## Gathering and Cleaning Data
 
-Using the [GitHub GraphQL API v4](https://developer.github.com/v4/) I performed query to search for Python repositiories.
-To ensure that only high quality Python code is used to train the RNN, I limited the search to repositiories with over
+Using the [GitHub GraphQL API v4](https://developer.github.com/v4/) I performed query to search for Python repositories.
+To ensure that only high quality Python code is used to train the RNN, I limited the search to repositories with over
 1000 stars. The query results are an stored on Amazon Aurora Relational Database with the following columns:
 
 * Repository Name
