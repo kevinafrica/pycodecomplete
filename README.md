@@ -106,7 +106,7 @@ The repository has the following structure. GitHub scaping and cleaning are loca
     └── templates
         └── template.html
 ```
-Recreating the corpus from GitHub requires a [GitHub personal access token](https://github.com/settings/tokens/new). Create a token and save the token file to your local computer.  
+Recreating the corpus from GitHub requires a [GitHub personal access token](https://developer.github.com/v3/auth/#basic-authentication). Create a token and save the token file to your local computer.  
 
 Run the following command to generate the corpus with 1000 Python repos:
 ```
