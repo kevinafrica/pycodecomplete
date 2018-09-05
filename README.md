@@ -70,36 +70,48 @@ git clone https://github.com/kevinafrica/pycodecomplete.git
 ```
 The repository has the following structure. GitHub scraping and cleaning are located in the ./pycodecomplete/scraping folder. Code for RNN models and training are contained in the ./pycodecomplete/ml folder. Flask website application files are located in the ./pycodecomplete/webapp folder
 ```
-.
+├── images
+│   └── model.png
 ├── LICENSE
 ├── pycc.sh
 ├── pycodecomplete
 │   ├── ml
 │   │   ├── code_generation.py
+│   │   ├── codetovec.py
+│   │   ├── make_model_high_ram.py
 │   │   ├── make_model.py
+│   │   ├── multi_gpu.py
+│   │   ├── nohup.out
 │   │   ├── process_text.py
+│   │   ├── __pycache__
+│   │   │   ├── codetovec.cpython-36.pyc
+│   │   │   ├── process_text.cpython-36.pyc
+│   │   │   └── rnn.cpython-36.pyc
 │   │   └── rnn.py
-│   ├── scraping
-│   │   ├── __init__.py
-│   │   └── scrape_github.py
-│   ├── tests
-│   └── trained-models
+│   └── scraping
+│       ├── __init__.py
+│       ├── process_code.py
+│       ├── repo_list.csv
+│       └── scrape_github.py
 ├── README.md
 ├── requirements.txt
 ├── setup.py
 └── webapp
     ├── app.py
     ├── config.py
-    ├── requirements.txt
     ├── static
     │   ├── css
     │   │   └── main.css
-    │   ├── favicon.ico
+    │   ├── fonts
+    │   ├── images
+    │   │   ├── banner.jpg
+    │   │   └── favicon.ico
     │   └── js
-    │       ├── app.js
-    │       └── jquery-3.3.1.js
+    │       └── app.js
     └── templates
-        └── template.html
+        ├── index.html
+        └── template.html
+
 ```
 Recreating the corpus from GitHub requires a [GitHub personal access token](https://developer.github.com/v3/auth/#basic-authentication). Create a token and save the token file to your local computer.  
 
