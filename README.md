@@ -45,7 +45,7 @@ After the repository metadata is collected I use [GitPython](https://github.com/
 the repository to an Amazon AWS EC2 instance. Non-Python files are deleted to save space, since the RNN is only trained on
 and predicts Python code.
 
-In total, the corpus consists of 2.4Gb of data totaling 185,580 .py files containing 400,383 lines, 1,337,590 words, 16,056,221 characters of code
+In total, the corpus consists of 2.7Gb of data totaling 126,217 .py files containing 400,383 lines, 1,337,590 words, 16,056,221 characters of code
 
 ## Data Preparation
 The RNN is trained on a sequence of 100 characters. Training was performed on an [g2.8xlarge AWS EC2 instance](https://aws.amazon.com/ec2/instance-types/),
