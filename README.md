@@ -143,9 +143,9 @@ and train on a number of GPUs with the -g option:
 ```
 for a computer with 4 GPUs
 
-Finally once a model is complete you can start the flask app with the command:
+Finally once a model is trained you can start the flask app that will predict the next 25 characters with the command:
 ```
-./pycc.sh
+./pycc.sh /path/to/model 25
 ```
 
 ## Future Work
