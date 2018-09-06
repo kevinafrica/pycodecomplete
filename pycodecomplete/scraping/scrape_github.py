@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
-"""Example Google style docstrings.
+"""scrape_github.py
 
-This module demonstrates documentation as specified by the `Google Python
-Style Guide`_. Docstrings may extend over multiple lines. Sections are created
-with a section header and a colon followed by a block of indented text.
+This module takes three arguments, a GutHub API Token, a destination path
+and a number of repositories to clone, and clones all the repositories to 
+the specified path.
 
 Example:
 
     To clone 1000 Python repositories run the following the command:
 
-     $ python scrape_github.py -f /github/token/file 1000
+     $ python scrape_github.py -f /github/token/file /cloned/repos/destination/folder 1000
+
+    or, with a token string:
+
+     $ python scrape_github.py -t 123456789abcdefghi /cloned/repos/destination/folder 1000
 
 Attributes:
     module_level_variable1 (int): Module level variables may be documented in
@@ -22,7 +26,6 @@ Attributes:
 
 Todo:
     * 
-
 """
 import os
 import sys
@@ -76,6 +79,8 @@ def main():
 
 
 def json_query(batch_size, after_cursor=''):
+    '''The GraphQL Query to obtain all relevant meta data from Python
+    repositories'''
     return {'query': '''{
   search(query: "stars:>1000 language:Python", type: REPOSITORY, first: %d, %s) {
       pageInfo {
