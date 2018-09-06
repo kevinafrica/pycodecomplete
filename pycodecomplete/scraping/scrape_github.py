@@ -1,3 +1,29 @@
+# -*- coding: utf-8 -*-
+"""Example Google style docstrings.
+
+This module demonstrates documentation as specified by the `Google Python
+Style Guide`_. Docstrings may extend over multiple lines. Sections are created
+with a section header and a colon followed by a block of indented text.
+
+Example:
+
+    To clone 1000 Python repositories run the following the command:
+
+     $ python scrape_github.py -f /github/token/file 1000
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+        Either form is acceptable, but the two should not be mixed. Choose
+        one convention to document module level variables and be consistent
+        with it.
+
+Todo:
+    * 
+
+"""
 import os
 import sys
 from argparse import ArgumentParser
@@ -88,14 +114,27 @@ def json_query(batch_size, after_cursor=''):
 
 
 def header(api_token):
+    '''Header for GraphQL Query'''
     return {'Authorization': 'token %s' % api_token}
 
 def apiurl():
+    '''URL for the GitHub GraphQL API''' 
     return 'https://api.github.com/graphql'
 
 
 def df_from_query(token, n, batch_size=10):
+    '''Create a Pandas dataframe from the result of a Query. Since the limit
+    for results is 100 per page. While there are next pages available, iterate
+    through each page and append those results to the dataframe.
 
+    Args:
+        token (String): The user's GitHub OAuth token
+        n (int): Number of repositiories to clone
+        batch_size (int): Size of the batches to clone the repositories in
+
+    Returns:
+        dataframe: Dataframe containing the query results
+    '''
     i = 0
     n_batches = math.ceil(n / float(batch_size))
     hasNextPage = True
@@ -134,6 +173,15 @@ def df_from_query(token, n, batch_size=10):
 
 
 def clone_repos_from_df(to_path, repos_df):
+    '''Clone all the repositories from the dataframe to a specified path
+
+    Args:
+        to_path (String): The path to clone the repositories to
+        repos_df (dataframe): The dataframe containing repository metadata
+
+    Returns:
+        None
+    '''
     n = repos_df.shape[0]
     for i, row in repos_df.iterrows():
         path = os.path.join(to_path, row['nameWithOwner'])
@@ -147,50 +195,5 @@ def clone_repos_from_df(to_path, repos_df):
                     os.remove(os.path.join(root, name))
 
 
-def clone_repos(n, batch_size=100):
-
-    n_batches = math.ceil(n / batch_size)
-
-    for i in range(n_batches):
-        pass
-
-
 if __name__ == '__main__':
     main()
-
-
-'''{
-  search(query: "stars:>1000 language:Python", type: REPOSITORY, first: 10) {
-    repositoryCount
-    edges {
-      node {
-        ... on Repository {
-          nameWithOwner
-          diskUsage
-          homepageUrl
-          mirrorUrl
-          projectsUrl
-          resourcePath
-          sshUrl
-          url
-        }
-      }
-    }
-  }
-}'''
-
-"""{'query':
-    '''{
-          viewer { 
-            repositories(first: 1) {
-                totalCount pageInfo {
-                  hasNextPage endCursor 
-                }
-                edges { 
-                  node { 
-                    name
-                  }
-                }
-            }
-        } 
-        }'''}"""
