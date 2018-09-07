@@ -1,3 +1,25 @@
+# -*- coding: utf-8 -*-
+# Author: Kevin Africa
+# License: MIT
+"""process_code.py
+
+This module allows the user to apply a series of transformations to clean up
+and standardize all the Python files in a given folder and appends all the
+cleaned files to a single .py file.
+
+Example:
+
+    To clone convert Python 2 to 3 and perform PEP 8 transformation run the
+    following:
+
+     $ python process_code.py /repos/source/folder /destination/file.py --twotothree --autopep8
+
+Attributes:
+    None
+
+Todo:
+    * 
+"""
 from argparse import ArgumentParser
 from subprocess import check_call
 import glob
