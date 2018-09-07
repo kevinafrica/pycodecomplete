@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# Author: Kevin Africa
-# License: MIT
-"""process_code.py
+'''process_code.py
 
 This module allows the user to apply a series of transformations to clean up
 and standardize all the Python files in a given folder and appends all the
@@ -19,7 +17,7 @@ Attributes:
 
 Todo:
     * 
-"""
+'''
 from argparse import ArgumentParser
 from subprocess import check_call
 import glob
@@ -79,13 +77,16 @@ def main():
                               pad(settings.padding, '\x0c'))
 
 def pad(n, padding):
+    '''Return a string composed of padding characters, n long'''
     return padding * n
 
 
 def n_pad(text, n, padding='\x0b'):
+    '''Return the supplied text with n characters of padding appended to the end'''
     return padding * n + text
 
 def remove_comments_and_docstrings(source):
+    '''Strip comments and docstings from source'''
     io_obj = io.StringIO(source)
     out = ""
     prev_toktype = tokenize.INDENT
@@ -140,6 +141,7 @@ def remove_comments_and_docstrings(source):
 
 
 def remove_last_n_lines(file, number=2):
+    '''Delete the last n lines from a given file'''
     count = 0
     with open(file, 'r+b', buffering=0) as f:
         f.seek(0, os.SEEK_END)
@@ -160,7 +162,6 @@ def remove_last_n_lines(file, number=2):
 
     if count < number + 1:
         print("No change: requested removal would leave empty file")
-
 
 
 if __name__ == '__main__':

@@ -1,8 +1,11 @@
-'''RNN model building and training'''
+# -*- coding: utf-8 -*-
+'''rnn.py
+Module used for RNN model building and training. Contains class pyCodeRNNBuilder
+than contains a Keras Sequential model, training data, and training hyperparameters
 
-# Authors: Kevin Africa
-# License: MIT
-
+Todo:
+    * 
+'''
 import os
 import random
 import sys
@@ -24,11 +27,32 @@ from codetovec import PyCodeVectors
 
 
 class pyCodeRNNBuilder():
+    '''pyCodeRNNBuilder object that creates a Keras RNN model and training data and hyperparameters
+
+        Parameters:
+        sequence_length -- The number of characters in a sequence
+        save_pickle_folder -- location to save the pickled model after each epoch
+        pycode_directory -- location of the data
+        vocabulary -- string containing all the characters to consider (default string.printable)
+        hidden_layer_dim -- number of layers in the RNN (default 1)
+        dropout -- add dropout layers between each layer of LSTMs (default True)
+        dropout_rate -- the dropout rate for each droput layer (default 0.2)
+        step_size -- the number of characters to step to create the next sequence (default 1)
+        n_gpu -- number of GPUs to train on (default None)
+        model -- existing model file location (default None)
+
+        Attributes:
+        build_model -- create Keras RNN model with the specified hyperparameters
+        sample -- sample from the model probability distribution
+        on_epoch_end -- print sample the RNN model output after each epoch
+        fit -- start batch training of the RNN
+    '''
 
     def __init__(self, sequence_length, save_pickle_folder, pycode_directory,
                  vocabulary=string.printable,
                  n_layers=1, hidden_layer_dim=128,
                  dropout=True, dropout_rate=.2, step_size=1, n_gpu=None, model=None):
+
         self.sequence_length = sequence_length
         self.vocabulary = vocabulary
         self.vocabulary_size = len(vocabulary)
@@ -66,12 +90,12 @@ class pyCodeRNNBuilder():
             print('Continuing training existing model')
             print('Using', self.n_gpu, 'GPUs')
             parallel_model = multi_gpu_model(model, gpus=self.n_gpu)
-            parallel_model.compile(loss='categorical_crossentropy', optimizer="adam")
+            parallel_model.compile(
+                loss='categorical_crossentropy', optimizer="adam")
             self.model = parallel_model
-        
 
     def build_model(self):
-        """Build a Keras sequential model for training the char-rnn"""
+        '''Build a Keras sequential model for training the char-rnn'''
         model = Sequential()
         for i in range(self.n_layers):
             model.add(
@@ -95,14 +119,15 @@ class pyCodeRNNBuilder():
         else:
             print('Using ', self.n_gpu, ' GPUs')
             parallel_model = multi_gpu_model(model, gpus=self.n_gpu)
-            parallel_model.compile(loss='categorical_crossentropy', optimizer="adam")
+            parallel_model.compile(
+                loss='categorical_crossentropy', optimizer="adam")
             self.model = parallel_model
             return parallel_model
 
         return model
 
     def sample(self, preds, temperature=1.0):
-        # helper function to sample an index from a probability array
+        # Helper function to sample an index from a probability array
         preds = np.asarray(preds).astype('float64')
         preds = np.log(preds) / temperature
         exp_preds = np.exp(preds)
@@ -111,7 +136,7 @@ class pyCodeRNNBuilder():
         return np.argmax(probas)
 
     def on_epoch_end(self, epoch, logs):
-        # Function invoked at end of each epoch. Prints generated text.
+        # Function at end of each epoch. Prints generated text.
 
         text = ' '
         print()
@@ -149,8 +174,8 @@ class pyCodeRNNBuilder():
     def fit(self, steps_per_epoch=None, max_queue_size=1, batch_size=512,
             epochs=5, initial_epoch=0, validation_steps=None, multiprocessing=False,
             shuffle_source_files=True, workers=1):
-
-        #if steps_per_epoch is None:
+        '''Perform batch training of the RNN with the specified hyperparamenters'''
+        # if steps_per_epoch is None:
         #    steps_per_epoch = self.char_vectorizer.steps_per_epoch
 
         if steps_per_epoch is None:
@@ -158,7 +183,7 @@ class pyCodeRNNBuilder():
 
         if validation_steps is None:
             validation_steps = 1
-        
+
         if shuffle_source_files:
             self.char_vectorizer.shuffle_files()
 
@@ -170,7 +195,7 @@ class pyCodeRNNBuilder():
         print('Intial Epcoh =', initial_epoch)
 
         self.model.fit_generator(
-            #generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
+            # generator=self.char_vectorizer.batch_generator(batch_size=batch_size),
             generator=self.pycodevectors.data_generator(batch_size=batch_size),
             steps_per_epoch=steps_per_epoch,
             max_queue_size=max_queue_size,
@@ -179,6 +204,11 @@ class pyCodeRNNBuilder():
             workers=workers,
             use_multiprocessing=False,
             verbose=1,
-            validation_data=self.pycodevectors.data_generator(batch_size=batch_size),
+            validation_data=self.pycodevectors.data_generator(
+                batch_size=batch_size),
             validation_steps=validation_steps,
             callbacks=[self.checkpoint])
+
+
+newvariable632 = 2 + 3
+a = 1 + 2 + 3
