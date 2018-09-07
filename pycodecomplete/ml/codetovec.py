@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+'''codetovec.py
+
+PyCodeVectors converts Python code to encoded vectors using multiprocessing
+
+Todo:
+    * 
+'''
 import glob
 import io
 import os
@@ -7,6 +15,26 @@ import multiprocessing
 
 
 class PyCodeVectors():
+    '''PyCodeVectors object that converts Python code to one-hot-encoded vectors
+
+    Parameters:
+        source_directory -- directory of the Python code data
+        encoding -- text file encoding (default ascii)
+        decode_errors -- decoding error handling (default ignore)
+        vocabulary -- string containing characters to consider (default string.printable)
+        sequence_length -- length of each sequence (default 100)
+        step_size -- number of characters to step to create the next sequence (default 1)
+        file_extension -- the file extension of teh fiels to use as data (default .py)
+        pad_token -- token to use as padding (default \x0c)
+
+    Attributes:
+        vocabulary_length -- number of characters in vocabulary
+        char_to_idx -- dictionary that maps character to one-hot-encoding index
+        idx_to_char -- dictionary that maps one-hot-encoding index to character
+        file_list -- list of all files used as data
+        n_files -- number of files used
+        source_length -- total number of characters in all the files
+    '''
 
     def __init__(self,
                  encoding='ascii',
@@ -16,7 +44,7 @@ class PyCodeVectors():
                  step_size=1,
                  file_extension='.py',
                  pad_token='\x0c'):
-
+        '''Create a PyCodeVectors object'''
         self.source_directory = None
         self.encoding = encoding
         self.decode_errors = decode_errors
@@ -35,6 +63,7 @@ class PyCodeVectors():
         self.source_length = None
 
     def fit(self, source_directory):
+        '''Set the object's data directory'''
         self.file_list = self._generate_filelist(source_directory)
         self.n_files = len(self.file_list)
         self.source = self.concatenate_source_code_parallel(self.file_list)
@@ -102,7 +131,7 @@ class PyCodeVectors():
         return ''.join(pool.map(self.read_source_code_parallel, file_list))
 
     def vectorize(self, code_string):
-
+        '''Non parallel, encode all files as feature and target numpy arrays'''
         source_length = len(code_string)
         n_samples = source_length - self.sequence_length
 
@@ -119,9 +148,11 @@ class PyCodeVectors():
         return X, y
 
     def _vectorize_code_parallel_helper(self, file):
+        '''Helper for vectorize_code_parallel'''
         return self.vectorize(self.read_source_code_parallel(file))
 
     def vectorize_code_parallel(self, file_list):
+        '''Use multiple CPUs to encode all files as feature and target numpy arrays'''
         pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
         Xs, ys = zip(
@@ -157,7 +188,7 @@ class PyCodeVectors():
         return X, y
 
     def data_generator(self, batch_size, batch_count=None, ignore=['\x0c']):
-
+        '''Batch generator for Keras fit_generator'''
         if batch_count is None:
             batch_count = (self.source_length -
                            self.sequence_length) // batch_size
