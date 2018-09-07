@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Author: Kevin Africa
-# License: MIT
 """scrape_github.py
 
 This module takes three arguments, a GutHub API Token, a destination path
@@ -67,7 +65,6 @@ def main():
     elif settings.token_string:
         token = settings.token_string
 
-
     repos_df = df_from_query(token, settings.count, batch_size=100)
     repos_df.to_csv('repo_list.csv')
 
@@ -118,8 +115,9 @@ def header(api_token):
     '''Header for GraphQL Query'''
     return {'Authorization': 'token %s' % api_token}
 
+
 def apiurl():
-    '''URL for the GitHub GraphQL API''' 
+    '''URL for the GitHub GraphQL API'''
     return 'https://api.github.com/graphql'
 
 
@@ -146,15 +144,16 @@ def df_from_query(token, n, batch_size=10):
 
         if batch_size > n:
             batch_size = n
-            
+
         json_result = requests.post(apiurl(),
-                                         json=json_query(batch_size, end_Cursor),
-                                         headers=header(token))
+                                    json=json_query(batch_size, end_Cursor),
+                                    headers=header(token))
 
         data_dict = json.loads(json_result.text)
         edge_list = data_dict['data']['search']['edges']
         hasNextPage = data_dict['data']['search']['pageInfo']['hasNextPage']
-        end_Cursor = 'after: "%s"' % (data_dict['data']['search']['pageInfo']['endCursor'])
+        end_Cursor = 'after: "%s"' % (
+            data_dict['data']['search']['pageInfo']['endCursor'])
 
         data_list.extend([pd.DataFrame.from_dict(
             e['node'], orient='index').T for e in edge_list])

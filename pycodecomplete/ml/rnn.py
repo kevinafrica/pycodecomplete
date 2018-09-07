@@ -208,7 +208,3 @@ class pyCodeRNNBuilder():
                 batch_size=batch_size),
             validation_steps=validation_steps,
             callbacks=[self.checkpoint])
-
-
-newvariable632 = 2 + 3
-a = 1 + 2 + 3

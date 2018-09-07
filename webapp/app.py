@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Author: Kevin Africa
-# License: MIT
 '''app.py
 
 Load pickled RNN model and start flask webapp.  
@@ -59,9 +57,11 @@ def load_objects():
 def index():
     return render_template('index.html')
 
+
 @app.route('/pycodecomplete', methods=['GET'])
 def pycodecomplete():
     return render_template('index.html')
+
 
 @app.route('/submit')
 def submit():
