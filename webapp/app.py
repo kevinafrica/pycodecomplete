@@ -1,3 +1,22 @@
+# -*- coding: utf-8 -*-
+# Author: Kevin Africa
+# License: MIT
+'''app.py
+
+Load pickled RNN model and start flask webapp.  
+
+Example:
+
+    To start a webapp that predicts the next 25 characters run the follwoing commmand:
+
+     $ python app.py /pickled/modelfile 25
+
+Attributes:
+    None
+
+Todo:
+    * 
+'''
 import sys
 import pdb
 sys.path.append('..')

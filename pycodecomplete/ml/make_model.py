@@ -1,3 +1,43 @@
+# -*- coding: utf-8 -*-
+'''make_model.py
+
+This module allows the user to create and train a RNN model. The user can
+specifiy a RNN architecture, data file location, pickled model save 
+location, and training options.
+
+Example:
+
+    To create and train a new RNN model with 100 character long sequences, 512 
+    LSTM nodes per layer, 4 layers, in batches of 512, for 20 epochs, run the
+    command:
+
+     $ python make_model.py /path/to/save/pickled/models /path/to/cloned/repos 100 512 1 4 512 20 1
+
+    The arguments are:
+        1. Path to save serialized RNN models. A trained model is saves after the completion of each epoch.
+        2. Path to the cloned GitHub repositories from which to train the model on
+        3. Sequence length (100 character long sequence)
+        4. Number of layers (4 layers of LSTM nodes)
+        5. Number of nodes per layer (512 nodes per layer)
+        6. Number of Epochs to train
+        7. Max Queue Size (Number of batches to queue in RAM)
+
+    Additionally you can continue training an existing model with the addition of the -m option:
+
+     $ -m /path/to/existing/model
+
+    and train on a number of GPUs with the -g option:
+
+     $ -g 4
+
+    for a computer with 4 GPUs
+
+Attributes:
+    None
+
+Todo:
+    * 
+'''
 import os
 import sys
 from argparse import ArgumentParser

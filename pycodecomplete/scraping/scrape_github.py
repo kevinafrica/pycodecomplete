@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Author: Kevin Africa
+# License: MIT
 """scrape_github.py
 
 This module takes three arguments, a GutHub API Token, a destination path
