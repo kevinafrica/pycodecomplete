@@ -35,11 +35,10 @@ class PyCodeVectors():
         self.source_length = None
 
     def fit(self, source_directory):
-        self.file_list = self._generate_filelist(source_directory) 
+        self.file_list = self._generate_filelist(source_directory)
         self.n_files = len(self.file_list)
         self.source = self.concatenate_source_code_parallel(self.file_list)
         self.source_length = len(self.source)
-
 
     def transform(self, source_directory, outfile=None, p=1.0):
         '''Convert .py files in source directory to feature and target numpy arrays
@@ -158,30 +157,35 @@ class PyCodeVectors():
         return X, y
 
     def data_generator(self, batch_size, batch_count=None, ignore=['\x0c']):
-    
+
         if batch_count is None:
-            batch_count = (self.source_length - self.sequence_length) // batch_size
-        
-        print('Generating Data with Batch Size:', batch_size, 'Batch Count:', batch_count)
+            batch_count = (self.source_length -
+                           self.sequence_length) // batch_size
+
+        print('Generating Data with Batch Size:',
+              batch_size, 'Batch Count:', batch_count)
 
         while True:
             char_idx = 0
             for batch_idx in range(batch_count):
-                X = np.zeros((batch_size, self.sequence_length, self.vocabulary_length), dtype=bool)
+                X = np.zeros((batch_size, self.sequence_length,
+                              self.vocabulary_length), dtype=bool)
                 y = np.zeros((batch_size, self.vocabulary_length))
-                
+
                 sample_idx = 0
                 while sample_idx < batch_size:
-                    
+
                     if self.source[char_idx + self.sequence_length] not in ignore:
                         for seq_pos in range(self.sequence_length):
-                            X[sample_idx, seq_pos, self.char_to_idx[self.source[char_idx + seq_pos]]] = True
-                        y[sample_idx, self.char_to_idx[self.source[char_idx + self.sequence_length]]] = True
-                        sample_idx +=1
+                            X[sample_idx, seq_pos,
+                                self.char_to_idx[self.source[char_idx + seq_pos]]] = True
+                        y[sample_idx, self.char_to_idx[self.source[char_idx +
+                                                                   self.sequence_length]]] = True
+                        sample_idx += 1
 
-                    if char_idx == self.source_length  - self.sequence_length - 1:
+                    if char_idx == self.source_length - self.sequence_length - 1:
                         char_idx = 0
                     else:
                         char_idx += 1
-                        
+
                 yield X, y

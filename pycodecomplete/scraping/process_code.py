@@ -67,7 +67,7 @@ def main():
 
     if settings.yapf:
         check_call(['autopep8', '--in-place', '--recursive', settings.source])
-    
+
     with io.open(settings.destination, 'w') as outfile:
         for f in filelist[:10]:
             with io.open(f, 'r', encoding='latin-1') as infile:
@@ -75,6 +75,7 @@ def main():
                 outfile.write(pad(settings.padding, '\x0b') +
                               infile.read() +
                               pad(settings.padding, '\x0c'))
+
 
 def pad(n, padding):
     '''Return a string composed of padding characters, n long'''
@@ -84,6 +85,7 @@ def pad(n, padding):
 def n_pad(text, n, padding='\x0b'):
     '''Return the supplied text with n characters of padding appended to the end'''
     return padding * n + text
+
 
 def remove_comments_and_docstrings(source):
     '''Strip comments and docstings from source'''
@@ -112,7 +114,7 @@ def remove_comments_and_docstrings(source):
         # This series of conditionals removes docstrings:
         elif token_type == tokenize.STRING:
             if prev_toktype != tokenize.INDENT:
-        # This is likely a docstring; double-check we're not inside an operator:
+                # This is likely a docstring; double-check we're not inside an operator:
                 if prev_toktype != tokenize.NEWLINE:
                     # Note regarding NEWLINE vs NL: The tokenize module
                     # differentiates between newlines that start a new statement
@@ -157,7 +159,7 @@ def remove_last_n_lines(file, number=2):
             if count == number + 1:
                 f.truncate()
                 print("Removed " + str(number) + " lines from end of file")
- 
+
             f.seek(-1, os.SEEK_CUR)
 
     if count < number + 1:
