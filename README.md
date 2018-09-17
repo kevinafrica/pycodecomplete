@@ -30,8 +30,8 @@ To ensure that only high quality Python code is used to train the RNN, I limited
 * Owner
 * Name With Owner
 * Disk Usage
-* Project's Url,
-* SSH Url,
+* Project's Url
+* SSH Url
 * Fork Count
 * Star Count
 * Watcher Count
